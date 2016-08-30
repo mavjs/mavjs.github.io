@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Windows on Ye Myat Kaung (Maverick)</title>
+    <link>https://mavjs.org/tags/windows/</link>
+    <description>Recent content in Windows on Ye Myat Kaung (Maverick)</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-gb</language>
+    <copyright>&amp;copy; 2016 Ye Myat Kaung (Maverick)</copyright>
+    <lastBuildDate>Thu, 10 May 2012 00:38:00 +0000</lastBuildDate>
+    <atom:link href="https://mavjs.org/tags/windows/index.xml" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>Getting Python Libraries Installed The Normal Way on Windows</title>
+      <link>https://mavjs.org/post/getting-python-libraries-installed/</link>
+      <pubDate>Thu, 10 May 2012 00:38:00 +0000</pubDate>
+      
+      <guid>https://mavjs.org/post/getting-python-libraries-installed/</guid>
+      <description>&lt;p&gt;I&amp;rsquo;ve been using GNU/Linux distributions for almost 2 years and with &lt;a href=&#34;https://fedoraproject.org&#34;&gt;Fedora&lt;/a&gt; for about ~7-8 months.&lt;/p&gt;
+
+&lt;p&gt;Every single day I do some experiments with &lt;a href=&#34;http://python.org&#34;&gt;python&lt;/a&gt;, and every single time it makes me feel comfortable using Fedora to write scripts. It removes headaches from happening because I don&amp;rsquo;t have to figure out ways to install python libraries you need. I can just go forward with concentrating on coding.&lt;/p&gt;
+
+&lt;p&gt;There&amp;rsquo;s a little script I wrote called; &lt;em&gt;&lt;a href=&#34;https://github.com/mavjs/ucti-timetable&#34;&gt;ucti-timetable&lt;/a&gt;&lt;/em&gt;. It&amp;rsquo;s used to download timetables from my university and store them locally. But since a large user base from my university are windows users, I had to make it work on windows as well. Well, to be honest it works, but only one thing:&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;PAIN!!&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;It&amp;rsquo;s so painful to install a python library on windows. It fails most of the time&amp;hellip;why is that?, you ask me..&lt;/p&gt;
+
+&lt;p&gt;Well, it&amp;rsquo;s because the python executable path is not in your $PATH. dafuq, right? So, yeah, this is how you do it (based on Windows 7):&lt;/p&gt;
+
+&lt;p&gt;&lt;code&gt;Right click -&amp;gt; My Computer -&amp;gt; Properties -&amp;gt; Advanced System Settings -&amp;gt; Advanced tab -&amp;gt;Environment Variables -&amp;gt; System Variables&lt;/code&gt;&lt;/p&gt;
+
+&lt;p&gt;after that find &lt;code&gt;PATH&lt;/code&gt; and append this or equivalent (depending on where your python gets installed): &lt;code&gt;C:\Python27\&lt;/code&gt;&lt;/p&gt;
+
+&lt;p&gt;Only after you do this you could install &lt;a href=&#34;http://www.crummy.com/software/BeautifulSoup&#34;&gt;BeautifulSoup&lt;/a&gt; the &lt;em&gt;&amp;ldquo;normal&amp;rdquo;&lt;/em&gt; way&lt;/p&gt;
+
+&lt;p&gt;&lt;code&gt;python setup.py install&lt;/code&gt;&lt;/p&gt;
+
+&lt;p&gt;Insane, right?&lt;/p&gt;
+</description>
+    </item>
+    
+  </channel>
+</rss>

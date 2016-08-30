@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Wine on Ye Myat Kaung (Maverick)</title>
+    <link>https://mavjs.org/tags/wine/</link>
+    <description>Recent content in Wine on Ye Myat Kaung (Maverick)</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-gb</language>
+    <copyright>&amp;copy; 2016 Ye Myat Kaung (Maverick)</copyright>
+    <lastBuildDate>Fri, 14 Nov 2014 14:26:00 +0000</lastBuildDate>
+    <atom:link href="https://mavjs.org/tags/wine/index.xml" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>World of Warcraft on Fedora 20 via wine</title>
+      <link>https://mavjs.org/post/world-of-warcraft-on-f20-via-wine/</link>
+      <pubDate>Fri, 14 Nov 2014 14:26:00 +0000</pubDate>
+      
+      <guid>https://mavjs.org/post/world-of-warcraft-on-f20-via-wine/</guid>
+      <description>&lt;p&gt;Install wine:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-shell-session&#34;&gt;    # sudo yum install wine
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Download World of Warcraft Setup Installer from &lt;a href=&#34;https://us.battle.net/account/download/?show=wow&#34;&gt;https://us.battle.net/account/download/?show=wow&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;Run the installer with wine:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-shell-session&#34;&gt;    # cd ~/Downloads/
+    # wine World-of-Warcraft-Setup-enGB.exe
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;After the installation completes, it will ask you to login to your Battlenet Account. Instead, quit the application. Then tell it to use software rendered OpenGL by executing (it has a bug where the interface is just black canvas on some intel cards):&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-shell-session&#34;&gt;    % export LIBGL_ALWAYS_SOFTWARE=1
+    % wine ~/.wine/drive_c/Program\ Files\ (x86)/Battle.net/Battle.net\ Launcher.exe
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Battlenet actually allows you to play even though it hasn&amp;rsquo;t finished downloading if it has reached a certain downloaded size. Either wait to finish or open the game. When you run it the first time it will take a while and FPS is not that great. Quit the game. Modify &lt;strong&gt;SET gxApi &amp;ldquo;D3D9&amp;rdquo;&lt;/strong&gt; to &lt;strong&gt;SET gxApi &amp;ldquo;Opengl&amp;rdquo;&lt;/strong&gt; in the following file:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-shell-session&#34;&gt;    $ ~/.wine/drive_c/Program\ Files\ (x86)/World\ of\ Warcraft/WTF/Config.wtf
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;After that your game should work in decent FPS.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Disclaimer&lt;/strong&gt;:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Have not tried the gameplay yet, since my subscription expired. :-(&lt;/li&gt;
+&lt;li&gt;Fedora 20 running on a 13&amp;rdquo;, 2.8Ghz retina macbookpro, 2013 edition.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Sources&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;https://appdb.winehq.org/objectManager.php?sClass=version&amp;amp;iId=30545&#34;&gt;https://appdb.winehq.org/objectManager.php?sClass=version&amp;amp;iId=30545&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;http://www.webupd8.org/2014/10/partial-workaround-for-black-distorted.html&#34;&gt;http://www.webupd8.org/2014/10/partial-workaround-for-black-distorted.html&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+    </item>
+    
+  </channel>
+</rss>

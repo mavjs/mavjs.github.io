@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="en-gb">
+<head>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="theme" content="hugo-academic">
+    <meta name="generator" content="Hugo 0.17-DEV" />
+    <meta name="author" content="Ye Myat Kaung">
+    <meta name="description" content="Computer Security Enthusiast">
+
+    <link rel="stylesheet" href="https://mavjs.org/css/highlight.min.css">
+    <link rel="stylesheet" href="https://mavjs.org/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://mavjs.org/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://mavjs.org/css/academicons.min.css">
+    <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Lato:400,700|Merriweather|Roboto+Mono">
+    <link rel="stylesheet" href="https://mavjs.org/css/hugo-academic.css">
+    
+
+
+    <link rel="shortcut icon" href="https://mavjs.org/img/favicon.ico" type="image/x-icon">
+    <link rel="canonical" href="https://mavjs.org/post/zsh-autocomplete-function-to-change-and/">
+
+    <title>Zsh Autocomplete Function to change and auto complete directories&#39; name | Ye Myat Kaung (Maverick)</title>
+
+</head>
+<body id="top">
+
+
+<nav class="navbar navbar-default navbar-fixed-top" id="navbar-main">
+    <div class="container">
+
+        
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target=".navbar-collapse" aria-expanded="false">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="https://mavjs.org/">Ye Myat Kaung (Maverick)</a>
+        </div>
+
+        
+        <div class="collapse navbar-collapse" id="#navbar-collapse-1">
+
+            
+            <ul class="nav navbar-nav navbar-right">
+                
+                <li class="nav-item"><a href="https://mavjs.org/#top">Home</a></li>
+                
+                <li class="nav-item"><a href="https://mavjs.org/post/">Posts</a></li>
+                
+                <li class="nav-item"><a href="https://mavjs.org/#projects">Projects</a></li>
+                
+                <li class="nav-item"><a href="https://mavjs.org/#contact">Contact</a></li>
+                
+            </ul>
+
+        </div>
+    </div>
+</nav>
+
+<div class="container">
+
+    <article class="article" itemscope itemtype="http://schema.org/Article">
+
+        
+
+        <h1 itemprop="name">Zsh Autocomplete Function to change and auto complete directories&#39; name</h1>
+
+        
+
+<div class="article-metadata">
+
+    <span class="article-date">
+        <time datetime="2012-10-27 05:01:00 &#43;0000 UTC" itemprop="datePublished">Sat, Oct 27, 2012</time>
+    </span>
+
+    
+    
+    
+    <span class="article-tags">
+        <i class="fa fa-tags"></i>
+        
+        <a class="article-tag-link" href="https://mavjs.org/tags/zsh">Zsh</a>
+        
+    </span>
+    
+    
+
+    
+        
+<div class="share-box">
+    <ul class="share">
+        <li>
+            <a class="facebook" href="https://www.facebook.com/sharer.php?u=https%3a%2f%2fmavjs.org%2fpost%2fzsh-autocomplete-function-to-change-and%2f" target="_blank">
+                <i class="fa fa-facebook"></i>
+            </a>
+        </li>
+        <li>
+            <a class="twitter" href="https://twitter.com/intent/tweet?text=Zsh%20Autocomplete%20Function%20to%20change%20and%20auto%20complete%20directories%27%20name&amp;url=https%3a%2f%2fmavjs.org%2fpost%2fzsh-autocomplete-function-to-change-and%2f" target="_blank">
+                <i class="fa fa-twitter"></i>
+            </a>
+        </li>
+        <li>
+            <a class="linkedin" href="https://www.linkedin.com/shareArticle?mini=true&amp;url=https%3a%2f%2fmavjs.org%2fpost%2fzsh-autocomplete-function-to-change-and%2f&amp;title=Zsh%20Autocomplete%20Function%20to%20change%20and%20auto%20complete%20directories%27%20name" target="_blank">
+                <i class="fa fa-linkedin"></i>
+            </a>
+        </li>
+        <li>
+            <a class="weibo" href="http://service.weibo.com/share/share.php?url=https%3a%2f%2fmavjs.org%2fpost%2fzsh-autocomplete-function-to-change-and%2f&amp;title=Zsh%20Autocomplete%20Function%20to%20change%20and%20auto%20complete%20directories%27%20name" target="_blank">
+                <i class="fa fa-weibo"></i>
+            </a>
+        </li>
+        <li>
+            <a class="email" href="mailto:?subject=Zsh%20Autocomplete%20Function%20to%20change%20and%20auto%20complete%20directories%27%20name&amp;body=https%3a%2f%2fmavjs.org%2fpost%2fzsh-autocomplete-function-to-change-and%2f">
+                <i class="fa fa-envelope"></i>
+            </a>
+        </li>
+    </ul>
+</div>
+
+
+    
+
+</div>
+
+
+        <div class="article-style" itemprop="articleBody">
+            
+
+<p>About some weeks ago, I was trying to find a way to alias my favourite directory (~/Programming/Pythons) in zsh, and it should show me the directories contained inside it. But aliasing doesn&rsquo;t work, except to <code>cd</code> me to that directory. Or a function can help me get into the directories inside ~/Programming/Pythons but I&rsquo;d have to type out the directories&rsquo; name manually. That wasn&rsquo;t an option either.</p>
+
+<p>So I turned to &ldquo;Uncle Google&rdquo; :P for it. Also what I remembered from Zsh is that it&rsquo;s auto completion is really awesome. So I searched for &ldquo;zsh autocomplete function&rdquo; and read some stackoverflow examples and stuff. But I had some errors if I was using <a href="https://github.com/robbyrussell/oh-my-zsh">oh-my-zsh</a>&lsquo;s functions.zsh to store/write my zsh auto complete function in it.</p>
+
+<p>What I did was, instead of writing that auto complete function inside oh-my-zsh&rsquo;s functions.zsh, I wrote it directly inside .zshrc, like this:</p>
+
+<pre><code class="language-sh">    function prog() { 
+        cd ~/Programming/Pythons/$1;
+        }
+
+    _prog() {
+        _files -W ~/Programming/Pythons;
+        }
+
+    compdef _prog prog
+</code></pre>
+
+<p>What this code actually does is that when you type <code>prog</code> after sourcing your .zshrc file, it expands the defined directory, in here; &lsquo;~/Programming/Pythons/&rsquo; and the argument $1 is based on whatever directory you selected from the expansion of the directory from the function  <code>_prog()</code>, like this;</p>
+
+
+<figure >
+    
+        <img src="/img/zsh-autocomplete-function-to-change-and_s1600_Selection_021.png" />
+    
+    
+</figure>
+
+
+<p>This exactly did what I needed. If you got awesome auto complete
+functions written, do share it at the comments. :)</p>
+
+<h2 id="resources">Resources</h2>
+
+<ul>
+<li><a href="http://zsh.sourceforge.net/Guide/zshguide06.html">http://zsh.sourceforge.net/Guide/zshguide06.html</a></li>
+<li><a href="http://stackoverflow.com/questions/10700012/zsh-autocomplete-function-based-on-2-arguments">http://stackoverflow.com/questions/10700012/zsh-autocomplete-function-based-on-2-arguments</a></li>
+<li><a href="https://wiki.archlinux.org/index.php/Zsh#Command_Completion">https://wiki.archlinux.org/index.php/Zsh#Command_Completion</a></li>
+</ul>
+
+        </div>
+
+    </article>
+
+    <nav>
+    <ul class="pager">
+        
+        <li class="previous"><a href="https://mavjs.org/post/introduction-to-grok-web/"><span aria-hidden="true">&larr;</span> Introduction to Grok web application framework @ UCTI</a></li>
+        
+
+        
+        <li class="next"><a href="https://mavjs.org/post/steam-fail-to-start/">Steam fail to start <span aria-hidden="true">&rarr;</span></a></li>
+        
+    </ul>
+</nav>
+
+    
+<section id="comments">
+    <div id="disqus_thread">
+        
+    </div>
+</section>
+
+
+
+</div>
+<footer class="site-footer">
+    <div class="container">
+        <p class="powered-by">
+
+            &copy; 2016 Ye Myat Kaung (Maverick) &middot; 
+
+            Powered by the <a href="https://github.com/gcushen/hugo-academic" target="_blank">Academic theme</a> for <a href="http://gohugo.io" target="_blank">Hugo</a>.
+
+            <span class="pull-right"><a href="#" id="back_to_top"><span class="button_icon"><i class="fa fa-chevron-up fa-2x" aria-hidden="true"></i></span></a></span>
+
+        </p>
+    </div>
+</footer>
+
+        <script src="//cdnjs.cloudflare.com/ajax/libs/gsap/1.18.4/TweenMax.min.js"></script>
+        <script src="//cdnjs.cloudflare.com/ajax/libs/gsap/latest/plugins/ScrollToPlugin.min.js"></script>
+        <script src="https://mavjs.org/js/jquery-1.12.3.min.js"></script>
+        <script src="https://mavjs.org/js/bootstrap.min.js"></script>
+        <script src="https://mavjs.org/js/hugo-academic.js"></script>
+        
+
+        
+
+        
+        <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.3.0/highlight.min.js"></script>
+        <script>hljs.initHighlightingOnLoad();</script>
+
+        
+        
+
+    </body>
+</html>
+

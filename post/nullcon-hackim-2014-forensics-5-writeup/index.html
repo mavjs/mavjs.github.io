@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="en-gb">
+<head>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="theme" content="hugo-academic">
+    <meta name="generator" content="Hugo 0.17-DEV" />
+    <meta name="author" content="Ye Myat Kaung">
+    <meta name="description" content="Computer Security Enthusiast">
+
+    <link rel="stylesheet" href="https://mavjs.org/css/highlight.min.css">
+    <link rel="stylesheet" href="https://mavjs.org/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://mavjs.org/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://mavjs.org/css/academicons.min.css">
+    <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Lato:400,700|Merriweather|Roboto+Mono">
+    <link rel="stylesheet" href="https://mavjs.org/css/hugo-academic.css">
+    
+
+
+    <link rel="shortcut icon" href="https://mavjs.org/img/favicon.ico" type="image/x-icon">
+    <link rel="canonical" href="https://mavjs.org/post/nullcon-hackim-2014-forensics-5-writeup/">
+
+    <title>[Nullcon HackIM 2014] Forensics 5 Writeup | Ye Myat Kaung (Maverick)</title>
+
+</head>
+<body id="top">
+
+
+<nav class="navbar navbar-default navbar-fixed-top" id="navbar-main">
+    <div class="container">
+
+        
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target=".navbar-collapse" aria-expanded="false">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="https://mavjs.org/">Ye Myat Kaung (Maverick)</a>
+        </div>
+
+        
+        <div class="collapse navbar-collapse" id="#navbar-collapse-1">
+
+            
+            <ul class="nav navbar-nav navbar-right">
+                
+                <li class="nav-item"><a href="https://mavjs.org/#top">Home</a></li>
+                
+                <li class="nav-item"><a href="https://mavjs.org/post/">Posts</a></li>
+                
+                <li class="nav-item"><a href="https://mavjs.org/#projects">Projects</a></li>
+                
+                <li class="nav-item"><a href="https://mavjs.org/#contact">Contact</a></li>
+                
+            </ul>
+
+        </div>
+    </div>
+</nav>
+
+<div class="container">
+
+    <article class="article" itemscope itemtype="http://schema.org/Article">
+
+        
+
+        <h1 itemprop="name">[Nullcon HackIM 2014] Forensics 5 Writeup</h1>
+
+        
+
+<div class="article-metadata">
+
+    <span class="article-date">
+        <time datetime="2014-01-27 15:24:00 &#43;0000 UTC" itemprop="datePublished">Mon, Jan 27, 2014</time>
+    </span>
+
+    
+    
+    
+    <span class="article-tags">
+        <i class="fa fa-tags"></i>
+        
+        <a class="article-tag-link" href="https://mavjs.org/tags/writeups">writeups</a>, 
+        
+        <a class="article-tag-link" href="https://mavjs.org/tags/hackim2014">HackIM2014</a>, 
+        
+        <a class="article-tag-link" href="https://mavjs.org/tags/ctf">CTF</a>, 
+        
+        <a class="article-tag-link" href="https://mavjs.org/tags/forensics">forensics</a>
+        
+    </span>
+    
+    
+
+    
+        
+<div class="share-box">
+    <ul class="share">
+        <li>
+            <a class="facebook" href="https://www.facebook.com/sharer.php?u=https%3a%2f%2fmavjs.org%2fpost%2fnullcon-hackim-2014-forensics-5-writeup%2f" target="_blank">
+                <i class="fa fa-facebook"></i>
+            </a>
+        </li>
+        <li>
+            <a class="twitter" href="https://twitter.com/intent/tweet?text=%5bNullcon%20HackIM%202014%5d%20Forensics%205%20Writeup&amp;url=https%3a%2f%2fmavjs.org%2fpost%2fnullcon-hackim-2014-forensics-5-writeup%2f" target="_blank">
+                <i class="fa fa-twitter"></i>
+            </a>
+        </li>
+        <li>
+            <a class="linkedin" href="https://www.linkedin.com/shareArticle?mini=true&amp;url=https%3a%2f%2fmavjs.org%2fpost%2fnullcon-hackim-2014-forensics-5-writeup%2f&amp;title=%5bNullcon%20HackIM%202014%5d%20Forensics%205%20Writeup" target="_blank">
+                <i class="fa fa-linkedin"></i>
+            </a>
+        </li>
+        <li>
+            <a class="weibo" href="http://service.weibo.com/share/share.php?url=https%3a%2f%2fmavjs.org%2fpost%2fnullcon-hackim-2014-forensics-5-writeup%2f&amp;title=%5bNullcon%20HackIM%202014%5d%20Forensics%205%20Writeup" target="_blank">
+                <i class="fa fa-weibo"></i>
+            </a>
+        </li>
+        <li>
+            <a class="email" href="mailto:?subject=%5bNullcon%20HackIM%202014%5d%20Forensics%205%20Writeup&amp;body=https%3a%2f%2fmavjs.org%2fpost%2fnullcon-hackim-2014-forensics-5-writeup%2f">
+                <i class="fa fa-envelope"></i>
+            </a>
+        </li>
+    </ul>
+</div>
+
+
+    
+
+</div>
+
+
+        <div class="article-style" itemprop="articleBody">
+            <p>I play security competitions called Capture The Flag (CTF) with a
+group called <a href="http://gliderswirley.org">Glider Swirley</a></p>
+
+<p><strong>Points: 500</strong>
+<strong>Description: The client says that the system was compromise. There was no evidence found for the same. The client claims that some anti-forensics tool was used to remove the evidences. Our investigator agrees to it. Can you find out what was the command that was executed and at what time it was done?</strong></p>
+
+<p>There was a hint for it by one of the organizers.</p>
+
+<blockquote class="twitter-tweet"><p lang="en" dir="ltr"><a href="https://twitter.com/hashtag/Hint?src=hash">#Hint</a> for FOR5 &quot;it crashed when it was being cleaned up&quot;  <a href="https://twitter.com/hashtag/HackIM?src=hash">#HackIM</a> <a href="https://twitter.com/hashtag/ForensicChallenge?src=hash">#ForensicChallenge</a> <a href="https://twitter.com/nullcon">@nullcon</a> <a href="https://twitter.com/null0x00">@null0x00</a></p>&mdash; Prince Komal Boonlia (@boonlia) <a href="https://twitter.com/boonlia/status/427135133129269248">January 25, 2014</a></blockquote>
+<script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script>
+
+<p>Since all the forensics challenges were based on 1 VM image, it was already known that the image is Windows 7 SP1 x86, thus the profile to use for volatility - <a href="https://code.google.com/p/volatility/ was">https://code.google.com/p/volatility/ was</a> <strong>Win7SP1x86</strong>. So I acquired the memory dump of the system (MEMORY.DMP)</p>
+
+<p>As this was the first time we (me &amp; <a href="https://twitter.com/Maxthatsme">Beard-0</a>) had to use volatility, I tried to get familiar with it by looking at the process list. Issued with</p>
+
+<pre><code class="language-shell-session">    [nullcon-2014] &gt;&gt;&gt; % vol.py -f MEMORY.DMP --profile=Win7SP1x86 pslist
+</code></pre>
+
+<p>Showed a few processes. But clearly by that I knew it wasn&rsquo;t show me anything about a command being executed or a process crashing. Beard-0 looked through a few usage of volatility and found <strong>cmdscan</strong>. So I tried it out.</p>
+
+<pre><code class="language-shell-session">    [nullcon-2014] &gt;&gt;&gt; % vol.py -f MEMORY.DMP --profile=Win7SP1x86 cmdscan 
+    Volatility Foundation Volatility Framework 2.3.1
+    **************************************************
+    CommandProcess: conhost.exe Pid: 2200
+    CommandHistory: 0x292a70 Application: TPAutoConnect.exe Flags: Allocated
+    CommandCount: 0 LastAdded: -1 LastDisplayed: -1
+    FirstCommand: 0 CommandCountMax: 50
+    ProcessHandle: 0x58
+    **************************************************
+    CommandProcess: conhost.exe Pid: 2996
+    CommandHistory: 0x5f04f8 Application: cmd.exe Flags: Allocated, Reset
+    CommandCount: 2 LastAdded: 1 LastDisplayed: 1
+    FirstCommand: 0 CommandCountMax: 50
+    ProcessHandle: 0x58
+    Cmd #0 @ 0x5ed400: cd desktop
+    Cmd #1 @ 0x5f4730: sdelete -c -z c:
+    Cmd #36 @ 0x5c00c4: ^?_?\???\
+    Cmd #37 @ 0x5ed108: _?\????
+    **************************************************
+    CommandProcess: conhost.exe Pid: 2996
+    CommandHistory: 0x5f0698 Application: sdelete.exe Flags: Allocated
+    CommandCount: 0 LastAdded: -1 LastDisplayed: -1
+    FirstCommand: 0 CommandCountMax: 50
+    ProcessHandle: 0x50
+</code></pre>
+
+<p>So it seems the process we want is <strong>sdelete -c -z c:</strong>, but the flag format requires, the command and the time. So definitely it seems, we need a screenshot of when the process crashed. Now does volatility have a screenshot feature? Well, since it&rsquo;s so awesome it does.</p>
+
+<pre><code class="language-shell-session">    [nullcon-2014] &gt;&gt;&gt; % vol.py -f MEMORY.DMP --profile=Win7SP1x86 screenshot --dump-dir shots/
+</code></pre>
+
+<p>It just needs a directory to dump the screenshots and voila, one of
+the screenshots shows up:
+
+<figure >
+    
+        <img src="/img/nullcon-hackim-2014-forensics-5-writeup_s1600_session_1.WinSta0.Default.png" />
+    
+    
+</figure>
+</p>
+
+        </div>
+
+    </article>
+
+    <nav>
+    <ul class="pager">
+        
+        <li class="previous"><a href="https://mavjs.org/post/zeromutarts-ctf-crypto-challenges/"><span aria-hidden="true">&larr;</span> Zeromutarts CTF Crypto Challenges</a></li>
+        
+
+        
+        <li class="next"><a href="https://mavjs.org/post/nullcon-hackim-2014-forensics-2-writeup/">[Nullcon HackIM 2014] Forensics 2 Writeup <span aria-hidden="true">&rarr;</span></a></li>
+        
+    </ul>
+</nav>
+
+    
+<section id="comments">
+    <div id="disqus_thread">
+        
+    </div>
+</section>
+
+
+
+</div>
+<footer class="site-footer">
+    <div class="container">
+        <p class="powered-by">
+
+            &copy; 2016 Ye Myat Kaung (Maverick) &middot; 
+
+            Powered by the <a href="https://github.com/gcushen/hugo-academic" target="_blank">Academic theme</a> for <a href="http://gohugo.io" target="_blank">Hugo</a>.
+
+            <span class="pull-right"><a href="#" id="back_to_top"><span class="button_icon"><i class="fa fa-chevron-up fa-2x" aria-hidden="true"></i></span></a></span>
+
+        </p>
+    </div>
+</footer>
+
+        <script src="//cdnjs.cloudflare.com/ajax/libs/gsap/1.18.4/TweenMax.min.js"></script>
+        <script src="//cdnjs.cloudflare.com/ajax/libs/gsap/latest/plugins/ScrollToPlugin.min.js"></script>
+        <script src="https://mavjs.org/js/jquery-1.12.3.min.js"></script>
+        <script src="https://mavjs.org/js/bootstrap.min.js"></script>
+        <script src="https://mavjs.org/js/hugo-academic.js"></script>
+        
+
+        
+
+        
+        <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.3.0/highlight.min.js"></script>
+        <script>hljs.initHighlightingOnLoad();</script>
+
+        
+        
+
+    </body>
+</html>
+

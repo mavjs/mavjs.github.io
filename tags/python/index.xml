@@ -1,0 +1,152 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Python on Ye Myat Kaung (Maverick)</title>
+    <link>https://mavjs.org/tags/python/</link>
+    <description>Recent content in Python on Ye Myat Kaung (Maverick)</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-gb</language>
+    <copyright>&amp;copy; 2016 Ye Myat Kaung (Maverick)</copyright>
+    <lastBuildDate>Fri, 19 Sep 2014 21:09:00 +0000</lastBuildDate>
+    <atom:link href="https://mavjs.org/tags/python/index.xml" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>Setting up searx  with gunicorn and supervisor</title>
+      <link>https://mavjs.org/post/setting-up-searx-with-gunicorn-and/</link>
+      <pubDate>Fri, 19 Sep 2014 21:09:00 +0000</pubDate>
+      
+      <guid>https://mavjs.org/post/setting-up-searx-with-gunicorn-and/</guid>
+      <description>
+
+&lt;h2 id=&#34;what-is-searx&#34;&gt;What is searx?&lt;/h2&gt;
+
+&lt;p&gt;&lt;a href=&#34;https://github.com/asciimoo/searx&#34;&gt;searx&lt;/a&gt; is a privacy-respecting, hackable metasearch engine&lt;/p&gt;
+
+&lt;p&gt;I have been using my own instance of searx at &lt;a href=&#34;https://searx.gliderswirley.org/&#34;&gt;https://searx.gliderswirley.org/&lt;/a&gt; mostly because I can. :)&lt;/p&gt;
+
+&lt;p&gt;For some reason, my instance seems to go down at some random time, and I assumed it was uwsgi. :P And also because I wanted to try &lt;a href=&#34;http://gunicorn.org&#34;&gt;gunicorn&lt;/a&gt; and &lt;a href=&#34;http://supervisord.org&#34;&gt;supervisor&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;Most of the setup steps are already documented on the wiki at &lt;a href=&#34;https://github.com/asciimoo/searx/wiki/Installation&#34;&gt;https://github.com/asciimoo/searx/wiki/Installation&lt;/a&gt;, but I&amp;rsquo;ll recount the steps here anyways.&lt;/p&gt;
+
+&lt;p&gt;Install packages (extra package: supervisor):&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-shell-session&#34;&gt;    sudo apt-get install git build-essential libxslt-dev python-dev python-virtualenv python-pybabel zlib1g-dev supervisor
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Install searx:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-shell-session&#34;&gt;    cd /usr/localsudo 
+    git clone https://github.com/asciimoo/searx.git
+    sudo useradd searx -d /usr/local/searx
+    sudo chown searx:searx -R /usr/local/searx
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Install dependencies in a virtualenv (extra package: gunicorn):&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-shell-session&#34;&gt;    sudo -u searx -icd /usr/local/searx
+    virtualenv searx-ve. 
+    ./searx-ve/bin/activate
+    pip install -r requirements.txt
+    pip install gunicorn
+    python setup.py install
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Configure secretkey:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-shell-session&#34;&gt;    sed -i -e &amp;quot;s/ultrasecretkey/`openssl rand -hex 16`/g&amp;quot; searx/settings.yml
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Make a configuration file:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-shell-session&#34;&gt;    sudo touch /etc/supervisor/conf.d/searx.conf
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Edit the above conf to include:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-ini&#34;&gt;    [program:searx]
+    command=/usr/local/searx/searx-ve/bin/gunicorn searx.webapp:app
+    directory=/usr/local/searx/
+    user=searx
+    group=searx
+    autostart=true
+    autorestart=true
+    stdout_logfile=/var/log/supervisor/%(program_name)s-access.log
+    stderr_logfile=/var/log/supervisor/%(program_name)s-error.log
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Then start the supervisor service:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-shell-session&#34;&gt;    sudo service supervisor start
+&lt;/code&gt;&lt;/pre&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Introduction to Grok web application framework @ UCTI</title>
+      <link>https://mavjs.org/post/introduction-to-grok-web/</link>
+      <pubDate>Sun, 09 Sep 2012 06:34:00 +0000</pubDate>
+      
+      <guid>https://mavjs.org/post/introduction-to-grok-web/</guid>
+      <description>&lt;p&gt;Hey folks, we, the &lt;a href=&#34;http://fedora.my&#34;&gt;Fedora Malaysia&lt;/a&gt; community in conjunction with UCTI Free &amp;amp; Open Source Software SIG, have planned for an introductory workshop on &lt;a href=&#34;http://grok.zope.org&#34;&gt;Grok&lt;/a&gt;, a web application framework. It uses the &lt;a href=&#34;http://docs.zope.org/zopetoolkit&#34;&gt;Zope Toolkit (ZTK)&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;This session is aimed towards finding more python as well as zope/plone/FOSS developers  in Malaysia. The session is mentored by our very own &lt;a href=&#34;https://fedoraproject.org/wiki/Ambassadors&#34;&gt;Fedora Ambassador&lt;/a&gt;, &lt;a href=&#34;http://blog.kagesenshi.org&#34;&gt;Izhar a.k.a KageSenshi&lt;/a&gt;, who works at a local Plone support and service company called &lt;a href=&#34;http://www.inigo-tech.com&#34;&gt;Inigo Consulting&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Following are the details of the session:&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Date:&lt;/strong&gt; Sun 15th July, 2012&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Time:&lt;/strong&gt; 11:00-18:00&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Venue:&lt;/strong&gt; Level-2 Room-5 (L2-5), UCTI (Google Maps:
+&lt;a href=&#34;http://goo.gl/maps/dI7h)&#34;&gt;http://goo.gl/maps/dI7h)&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Fee:&lt;/strong&gt; Free Of Charge ;)&lt;/p&gt;
+
+&lt;p&gt;Folks coming to the session, (that&amp;rsquo;s you!), should bring along their own laptops (obviously!) and do not necessarily need to know &lt;a href=&#34;http://python.org&#34;&gt;Python&lt;/a&gt;, but need to have programming knowledge. Learning/knowing Python can be enhanced later on. Also need to know basic/intermediate HTML/CSS/JS.&lt;/p&gt;
+
+&lt;p&gt;Although, we prefer Unix/Linux systems like &lt;a href=&#34;https://fedoraproject.org&#34;&gt;Fedora&lt;/a&gt;, users are welcome to use any platform that they wish, provided that they know how to install Grok or any other software packages and troubleshoot problems if they arise.&lt;/p&gt;
+
+&lt;p&gt;We might be passing around some Fedora 17 if we happen to not finish them off at Malaysia OpenSource Conference. :P So, if you happen to know how to use *nix system and just need to boot it up to it, you can use a virtual machine to boot into a *nix system using the CDs/DVDs passed around or you can also ask me, for an ISO image before the session, if you need one. :)&lt;/p&gt;
+
+&lt;p&gt;See you all there!&lt;/p&gt;
+
+&lt;p&gt;Links:&lt;/p&gt;
+
+&lt;p&gt;Zope/Plone User Group Malaysia G+: &lt;a href=&#34;http://goo.gl/HcM7n&#34;&gt;http://goo.gl/HcM7n&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;Zope/Plone User Group Malaysia Maliling List: &lt;a href=&#34;http://groups.google.com/group/zplug-my&#34;&gt;http://groups.google.com/group/zplug-my&lt;/a&gt;&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Getting Python Libraries Installed The Normal Way on Windows</title>
+      <link>https://mavjs.org/post/getting-python-libraries-installed/</link>
+      <pubDate>Thu, 10 May 2012 00:38:00 +0000</pubDate>
+      
+      <guid>https://mavjs.org/post/getting-python-libraries-installed/</guid>
+      <description>&lt;p&gt;I&amp;rsquo;ve been using GNU/Linux distributions for almost 2 years and with &lt;a href=&#34;https://fedoraproject.org&#34;&gt;Fedora&lt;/a&gt; for about ~7-8 months.&lt;/p&gt;
+
+&lt;p&gt;Every single day I do some experiments with &lt;a href=&#34;http://python.org&#34;&gt;python&lt;/a&gt;, and every single time it makes me feel comfortable using Fedora to write scripts. It removes headaches from happening because I don&amp;rsquo;t have to figure out ways to install python libraries you need. I can just go forward with concentrating on coding.&lt;/p&gt;
+
+&lt;p&gt;There&amp;rsquo;s a little script I wrote called; &lt;em&gt;&lt;a href=&#34;https://github.com/mavjs/ucti-timetable&#34;&gt;ucti-timetable&lt;/a&gt;&lt;/em&gt;. It&amp;rsquo;s used to download timetables from my university and store them locally. But since a large user base from my university are windows users, I had to make it work on windows as well. Well, to be honest it works, but only one thing:&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;PAIN!!&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;It&amp;rsquo;s so painful to install a python library on windows. It fails most of the time&amp;hellip;why is that?, you ask me..&lt;/p&gt;
+
+&lt;p&gt;Well, it&amp;rsquo;s because the python executable path is not in your $PATH. dafuq, right? So, yeah, this is how you do it (based on Windows 7):&lt;/p&gt;
+
+&lt;p&gt;&lt;code&gt;Right click -&amp;gt; My Computer -&amp;gt; Properties -&amp;gt; Advanced System Settings -&amp;gt; Advanced tab -&amp;gt;Environment Variables -&amp;gt; System Variables&lt;/code&gt;&lt;/p&gt;
+
+&lt;p&gt;after that find &lt;code&gt;PATH&lt;/code&gt; and append this or equivalent (depending on where your python gets installed): &lt;code&gt;C:\Python27\&lt;/code&gt;&lt;/p&gt;
+
+&lt;p&gt;Only after you do this you could install &lt;a href=&#34;http://www.crummy.com/software/BeautifulSoup&#34;&gt;BeautifulSoup&lt;/a&gt; the &lt;em&gt;&amp;ldquo;normal&amp;rdquo;&lt;/em&gt; way&lt;/p&gt;
+
+&lt;p&gt;&lt;code&gt;python setup.py install&lt;/code&gt;&lt;/p&gt;
+
+&lt;p&gt;Insane, right?&lt;/p&gt;
+</description>
+    </item>
+    
+  </channel>
+</rss>

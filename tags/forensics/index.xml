@@ -1,0 +1,163 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Forensics on Ye Myat Kaung (Maverick)</title>
+    <link>https://mavjs.org/tags/forensics/</link>
+    <description>Recent content in Forensics on Ye Myat Kaung (Maverick)</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-gb</language>
+    <copyright>&amp;copy; 2016 Ye Myat Kaung (Maverick)</copyright>
+    <lastBuildDate>Fri, 31 Jan 2014 09:27:00 +0000</lastBuildDate>
+    <atom:link href="https://mavjs.org/tags/forensics/index.xml" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>[Nullcon HackIM 2014] Forensics 2 Writeup</title>
+      <link>https://mavjs.org/post/nullcon-hackim-2014-forensics-2-writeup/</link>
+      <pubDate>Fri, 31 Jan 2014 09:27:00 +0000</pubDate>
+      
+      <guid>https://mavjs.org/post/nullcon-hackim-2014-forensics-2-writeup/</guid>
+      <description>&lt;p&gt;&lt;strong&gt;Points: 200&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Description: There was a zip file on the desktop. I can&amp;rsquo;t remember the password for it.&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;We saw a zip file named: &lt;strong&gt;&amp;ldquo;null password.zip&amp;rdquo;&lt;/strong&gt; on the desktop. When
+opened, there are 2 files which are encrypted. So it was clear that we
+needed to crack the zip.&lt;/p&gt;
+
+
+&lt;figure &gt;
+    
+        &lt;img src=&#34;https://mavjs.org/img/nullcon-hackim-2014-forensics-2-writeup_s1600_Selection_271.png&#34; /&gt;
+    
+    
+&lt;/figure&gt;
+
+
+&lt;p&gt;First we looked at some hints from the challenge creator ;)&lt;/p&gt;
+
+&lt;blockquote class=&#34;twitter-tweet&#34;&gt;&lt;p lang=&#34;en&#34; dir=&#34;ltr&#34;&gt;&lt;a href=&#34;https://twitter.com/hashtag/Hint?src=hash&#34;&gt;#Hint&lt;/a&gt; for FOR2 &amp;quot;User was too dumb to store the password in the protected zip file itself&amp;quot;  &lt;a href=&#34;https://twitter.com/hashtag/HackIM?src=hash&#34;&gt;#HackIM&lt;/a&gt; &lt;a href=&#34;https://twitter.com/hashtag/ForensicChallenge?src=hash&#34;&gt;#ForensicChallenge&lt;/a&gt; &lt;a href=&#34;https://twitter.com/nullcon&#34;&gt;@nullcon&lt;/a&gt; &lt;a href=&#34;https://twitter.com/null0x00&#34;&gt;@null0x00&lt;/a&gt;&lt;/p&gt;&amp;mdash; Prince Komal Boonlia (@boonlia) &lt;a href=&#34;https://twitter.com/boonlia/status/426989036436078592&#34;&gt;January 25, 2014&lt;/a&gt;&lt;/blockquote&gt;
+&lt;script async src=&#34;//platform.twitter.com/widgets.js&#34; charset=&#34;utf-8&#34;&gt;&lt;/script&gt;
+
+&lt;blockquote class=&#34;twitter-tweet&#34;&gt;&lt;p lang=&#34;en&#34; dir=&#34;ltr&#34;&gt;&lt;a href=&#34;https://twitter.com/hashtag/Hint?src=hash&#34;&gt;#Hint&lt;/a&gt; for FOR2 &amp;quot;Why would someone put two files if it could have been done with one file&amp;quot;  &lt;a href=&#34;https://twitter.com/hashtag/HackIM?src=hash&#34;&gt;#HackIM&lt;/a&gt; &lt;a href=&#34;https://twitter.com/hashtag/ForensicChallenge?src=hash&#34;&gt;#ForensicChallenge&lt;/a&gt; &lt;a href=&#34;https://twitter.com/nullcon&#34;&gt;@nullcon&lt;/a&gt; &lt;a href=&#34;https://twitter.com/null0x00&#34;&gt;@null0x00&lt;/a&gt;&lt;/p&gt;&amp;mdash; Prince Komal Boonlia (@boonlia) &lt;a href=&#34;https://twitter.com/boonlia/status/426968851012530176&#34;&gt;January 25, 2014&lt;/a&gt;&lt;/blockquote&gt;
+&lt;script async src=&#34;//platform.twitter.com/widgets.js&#34; charset=&#34;utf-8&#34;&gt;&lt;/script&gt;
+
+&lt;p&gt;So, &lt;a href=&#34;https://twitter.com/Maxthatsme&#34;&gt;Beard-0&lt;/a&gt; looked at a freshly booted VM of the image (since I was lazy + forgot to save the initial snapshot and was already working on another Forensic challenge) and looked at the Temp folder in AppData/Local, there he found a folder name &lt;strong&gt;Rar$DI99.160&lt;/strong&gt; inside which had one of the file &lt;strong&gt;&amp;ldquo;Null final1.pdf&amp;rdquo;&lt;/strong&gt;. From this we looked at known attacks on zip files and found &lt;a href=&#34;https://en.wikipedia.org/wiki/Known-plaintext_attack&#34;&gt;https://en.wikipedia.org/wiki/Known-plaintext_attack&lt;/a&gt;&lt;/p&gt;
+
+
+&lt;figure &gt;
+    
+        &lt;img src=&#34;https://mavjs.org/img/nullcon-hackim-2014-forensics-2-writeup_s1600_Selection_272.png&#34; /&gt;
+    
+    
+&lt;/figure&gt;
+
+
+&lt;p&gt;We zipped the &lt;strong&gt;&amp;ldquo;Null final1.pdf&amp;rdquo;&lt;/strong&gt; into a zip. Installed the evaluation edition of Ultimate Zip Cracker - &lt;a href=&#34;http://download.cnet.com/Ultimate-ZIP-Cracker/3000-2092_4-10040839.html&#34;&gt;http://download.cnet.com/Ultimate-ZIP-Cracker/3000-2092_4-10040839.html&lt;/a&gt;&lt;/p&gt;
+
+
+&lt;figure &gt;
+    
+        &lt;img src=&#34;https://mavjs.org/img/nullcon-hackim-2014-forensics-2-writeup_s1600_Selection_273.png&#34; /&gt;
+    
+    
+&lt;/figure&gt;
+
+
+&lt;p&gt; Selected the &amp;ldquo;Plaintext attack&amp;rdquo; recovery method.&lt;/p&gt;
+
+
+&lt;figure &gt;
+    
+        &lt;img src=&#34;https://mavjs.org/img/nullcon-hackim-2014-forensics-2-writeup_s1600_Selection_274.png&#34; /&gt;
+    
+    
+&lt;/figure&gt;
+
+
+&lt;p&gt;Chose the &amp;ldquo;Null final1.pdf&amp;rdquo; zip file as plaintext file.&lt;/p&gt;
+
+
+&lt;figure &gt;
+    
+        &lt;img src=&#34;https://mavjs.org/img/nullcon-hackim-2014-forensics-2-writeup_s1600_Selection_275.png&#34; /&gt;
+    
+    
+&lt;/figure&gt;
+
+
+&lt;p&gt;And finally we had the unzip&amp;rsquo;d archive.&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>[Nullcon HackIM 2014] Forensics 5 Writeup</title>
+      <link>https://mavjs.org/post/nullcon-hackim-2014-forensics-5-writeup/</link>
+      <pubDate>Mon, 27 Jan 2014 15:24:00 +0000</pubDate>
+      
+      <guid>https://mavjs.org/post/nullcon-hackim-2014-forensics-5-writeup/</guid>
+      <description>&lt;p&gt;I play security competitions called Capture The Flag (CTF) with a
+group called &lt;a href=&#34;http://gliderswirley.org&#34;&gt;Glider Swirley&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Points: 500&lt;/strong&gt;
+&lt;strong&gt;Description: The client says that the system was compromise. There was no evidence found for the same. The client claims that some anti-forensics tool was used to remove the evidences. Our investigator agrees to it. Can you find out what was the command that was executed and at what time it was done?&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;There was a hint for it by one of the organizers.&lt;/p&gt;
+
+&lt;blockquote class=&#34;twitter-tweet&#34;&gt;&lt;p lang=&#34;en&#34; dir=&#34;ltr&#34;&gt;&lt;a href=&#34;https://twitter.com/hashtag/Hint?src=hash&#34;&gt;#Hint&lt;/a&gt; for FOR5 &amp;quot;it crashed when it was being cleaned up&amp;quot;  &lt;a href=&#34;https://twitter.com/hashtag/HackIM?src=hash&#34;&gt;#HackIM&lt;/a&gt; &lt;a href=&#34;https://twitter.com/hashtag/ForensicChallenge?src=hash&#34;&gt;#ForensicChallenge&lt;/a&gt; &lt;a href=&#34;https://twitter.com/nullcon&#34;&gt;@nullcon&lt;/a&gt; &lt;a href=&#34;https://twitter.com/null0x00&#34;&gt;@null0x00&lt;/a&gt;&lt;/p&gt;&amp;mdash; Prince Komal Boonlia (@boonlia) &lt;a href=&#34;https://twitter.com/boonlia/status/427135133129269248&#34;&gt;January 25, 2014&lt;/a&gt;&lt;/blockquote&gt;
+&lt;script async src=&#34;//platform.twitter.com/widgets.js&#34; charset=&#34;utf-8&#34;&gt;&lt;/script&gt;
+
+&lt;p&gt;Since all the forensics challenges were based on 1 VM image, it was already known that the image is Windows 7 SP1 x86, thus the profile to use for volatility - &lt;a href=&#34;https://code.google.com/p/volatility/ was&#34;&gt;https://code.google.com/p/volatility/ was&lt;/a&gt; &lt;strong&gt;Win7SP1x86&lt;/strong&gt;. So I acquired the memory dump of the system (MEMORY.DMP)&lt;/p&gt;
+
+&lt;p&gt;As this was the first time we (me &amp;amp; &lt;a href=&#34;https://twitter.com/Maxthatsme&#34;&gt;Beard-0&lt;/a&gt;) had to use volatility, I tried to get familiar with it by looking at the process list. Issued with&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-shell-session&#34;&gt;    [nullcon-2014] &amp;gt;&amp;gt;&amp;gt; % vol.py -f MEMORY.DMP --profile=Win7SP1x86 pslist
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Showed a few processes. But clearly by that I knew it wasn&amp;rsquo;t show me anything about a command being executed or a process crashing. Beard-0 looked through a few usage of volatility and found &lt;strong&gt;cmdscan&lt;/strong&gt;. So I tried it out.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-shell-session&#34;&gt;    [nullcon-2014] &amp;gt;&amp;gt;&amp;gt; % vol.py -f MEMORY.DMP --profile=Win7SP1x86 cmdscan 
+    Volatility Foundation Volatility Framework 2.3.1
+    **************************************************
+    CommandProcess: conhost.exe Pid: 2200
+    CommandHistory: 0x292a70 Application: TPAutoConnect.exe Flags: Allocated
+    CommandCount: 0 LastAdded: -1 LastDisplayed: -1
+    FirstCommand: 0 CommandCountMax: 50
+    ProcessHandle: 0x58
+    **************************************************
+    CommandProcess: conhost.exe Pid: 2996
+    CommandHistory: 0x5f04f8 Application: cmd.exe Flags: Allocated, Reset
+    CommandCount: 2 LastAdded: 1 LastDisplayed: 1
+    FirstCommand: 0 CommandCountMax: 50
+    ProcessHandle: 0x58
+    Cmd #0 @ 0x5ed400: cd desktop
+    Cmd #1 @ 0x5f4730: sdelete -c -z c:
+    Cmd #36 @ 0x5c00c4: ^?_?\???\
+    Cmd #37 @ 0x5ed108: _?\????
+    **************************************************
+    CommandProcess: conhost.exe Pid: 2996
+    CommandHistory: 0x5f0698 Application: sdelete.exe Flags: Allocated
+    CommandCount: 0 LastAdded: -1 LastDisplayed: -1
+    FirstCommand: 0 CommandCountMax: 50
+    ProcessHandle: 0x50
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;So it seems the process we want is &lt;strong&gt;sdelete -c -z c:&lt;/strong&gt;, but the flag format requires, the command and the time. So definitely it seems, we need a screenshot of when the process crashed. Now does volatility have a screenshot feature? Well, since it&amp;rsquo;s so awesome it does.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-shell-session&#34;&gt;    [nullcon-2014] &amp;gt;&amp;gt;&amp;gt; % vol.py -f MEMORY.DMP --profile=Win7SP1x86 screenshot --dump-dir shots/
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;It just needs a directory to dump the screenshots and voila, one of
+the screenshots shows up:
+
+&lt;figure &gt;
+    
+        &lt;img src=&#34;https://mavjs.org/img/nullcon-hackim-2014-forensics-5-writeup_s1600_session_1.WinSta0.Default.png&#34; /&gt;
+    
+    
+&lt;/figure&gt;
+&lt;/p&gt;
+</description>
+    </item>
+    
+  </channel>
+</rss>

@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Ucti on Ye Myat Kaung (Maverick)</title>
+    <link>https://mavjs.org/tags/ucti/</link>
+    <description>Recent content in Ucti on Ye Myat Kaung (Maverick)</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-gb</language>
+    <copyright>&amp;copy; 2016 Ye Myat Kaung (Maverick)</copyright>
+    <lastBuildDate>Mon, 30 Apr 2012 03:32:00 +0000</lastBuildDate>
+    <atom:link href="https://mavjs.org/tags/ucti/index.xml" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>Spreading Fedora Love - One At A Time</title>
+      <link>https://mavjs.org/post/spreading-fedora-love-one-at-a-time/</link>
+      <pubDate>Mon, 30 Apr 2012 03:32:00 +0000</pubDate>
+      
+      <guid>https://mavjs.org/post/spreading-fedora-love-one-at-a-time/</guid>
+      <description>&lt;p&gt;Disclaimer: This post is actually abit overdue. Was supposed to be up
+by Tuesday, but some stuff caught up.&lt;/p&gt;
+
+&lt;p&gt;Event Details&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;Time: 10:00 - 16:00&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Date: 23rd April, 2012&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Venue: UCTI&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Aim: Sharing knowledge/Teaching about GNU/Linux operating system(s).&lt;/p&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;This event was organized by &lt;a href=&#34;https://twitter.com/#!/rebelk0de&#34;&gt;rebelk0de&lt;/a&gt; and I,
+&lt;a href=&#34;https://fedoraproject.org/wiki/User:Mavjs&#34;&gt;Maverick&lt;/a&gt;. I have been contributing to Fedora Malaysia for about ~5-7months now, while rebelk0de has long since contributed/helped Fedora MY.&lt;/p&gt;
+
+&lt;p&gt;It was aimed at sparkling the GNU/Linux and FOSS enthusiasm in &lt;a href=&#34;http://ucti.edu.my&#34;&gt;UCTI&lt;/a&gt;, the event venue for FUDCon KL. Since UCTI had thousands of students, we had to start off with something smaller. So, we look for a small group of technical folks among the students, and we found the &lt;a href=&#34;https://sites.google.com/site/uctitechnicalassistantsteam&#34;&gt;UCTI Technical Assistants&lt;/a&gt; (TAs). TAs work in the UCTI computer labs to maintain approimately 300 computers running Windows operating system, daily.&lt;/p&gt;
+
+&lt;p&gt;And as recently, I, together with rebelk0de (as advisor) and a small group of 4 people, have been working hard to get UCTI Free &amp;amp; Open Source Software Special Interest Group (FOSS SIG) back into shape and in official status. Therefore, as a recruitment drive, to share knowledge about FOSS &amp;amp; GNU/Linux and to promote &amp;amp; expand the &amp;ldquo;Fedora Love&amp;rdquo; to the folks here in UCTI, I was there at the date of the event.&lt;/p&gt;
+
+&lt;p&gt;The event&amp;rsquo;s objective was to get Fedora and Ubuntu running with little or no headaches involved for beginners. And to understand abit about getting the installed operating system up and running with things the users needed getting installed on a as needed basis, so, mainly it was about teaching them how to make use of the &amp;ldquo;yum&amp;rdquo; and &amp;ldquo;apt-get&amp;rdquo; package management utilities.&lt;/p&gt;
+
+&lt;p&gt;The event started around 11:00 and was headed by rebelk0de. I was the assistant ;), mainly to help out when folks couldn&amp;rsquo;t catch up or something went wrong with their Fedora installs. I mainly shared my knowledge about &amp;ldquo;things to watch out for when installing Fedora&amp;rdquo;, especially, the different types of installation processes and some tips &amp;amp; tricks for beginners. I also distributed some leftover Fedora 16 CDs that I had from this year&amp;rsquo;s FAD, almost all of the folks that showed up got it.&lt;/p&gt;
+
+&lt;p&gt;We took off the event by installing &amp;ldquo;Fedora&amp;rdquo; on the virtualboxes which took approximately 30mins. The installation environments were inside virtualbox on Windows hosts. The reason to take this approach was that we would have needed a lot of extra precious hard disks for this one event, the machines retains their changes after reboot (so it was easier to use virtualboxes) and most of the folks who showed up have never installed/used either Fedora or Ubunt and GNU/Linux in general. Most of the time was taken on explanining the installation process and post installation configurations such as &amp;ldquo;adding their users to the sudoers if they forgot to add it&amp;rdquo; and about using the vi text editor.&lt;/p&gt;
+
+&lt;p&gt;Most of the tutorial/hands-on were done on Fedora. Ubuntu was just used to show how to use the package management utilities. We all had a lunch break around 14:00-15:00. And we wrapped up the event by 16:00.&lt;/p&gt;
+
+&lt;p&gt;rebelk0de and I have promised the folks to have more continuous classes for them in the future, and they have agreed. So, on with more classes/events then! :D&lt;/p&gt;
+
+&lt;p&gt;P.S. Will share the event photos after getting uploaded to Fedora My&amp;rsquo;s Albums. ;)&lt;/p&gt;
+
+&lt;p&gt;Edit: Here is the photos from the event: &lt;a href=&#34;https://plus.google.com/photos/109153510244556917522/albums/5735474293982143825&#34;&gt;GNU/Linux Intro Class at UCTI&lt;/a&gt;&lt;/p&gt;
+</description>
+    </item>
+    
+  </channel>
+</rss>

@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Gunicorn on Ye Myat Kaung (Maverick)</title>
+    <link>https://mavjs.org/tags/gunicorn/</link>
+    <description>Recent content in Gunicorn on Ye Myat Kaung (Maverick)</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-gb</language>
+    <copyright>&amp;copy; 2016 Ye Myat Kaung (Maverick)</copyright>
+    <lastBuildDate>Fri, 19 Sep 2014 21:09:00 +0000</lastBuildDate>
+    <atom:link href="https://mavjs.org/tags/gunicorn/index.xml" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>Setting up searx  with gunicorn and supervisor</title>
+      <link>https://mavjs.org/post/setting-up-searx-with-gunicorn-and/</link>
+      <pubDate>Fri, 19 Sep 2014 21:09:00 +0000</pubDate>
+      
+      <guid>https://mavjs.org/post/setting-up-searx-with-gunicorn-and/</guid>
+      <description>
+
+&lt;h2 id=&#34;what-is-searx&#34;&gt;What is searx?&lt;/h2&gt;
+
+&lt;p&gt;&lt;a href=&#34;https://github.com/asciimoo/searx&#34;&gt;searx&lt;/a&gt; is a privacy-respecting, hackable metasearch engine&lt;/p&gt;
+
+&lt;p&gt;I have been using my own instance of searx at &lt;a href=&#34;https://searx.gliderswirley.org/&#34;&gt;https://searx.gliderswirley.org/&lt;/a&gt; mostly because I can. :)&lt;/p&gt;
+
+&lt;p&gt;For some reason, my instance seems to go down at some random time, and I assumed it was uwsgi. :P And also because I wanted to try &lt;a href=&#34;http://gunicorn.org&#34;&gt;gunicorn&lt;/a&gt; and &lt;a href=&#34;http://supervisord.org&#34;&gt;supervisor&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;Most of the setup steps are already documented on the wiki at &lt;a href=&#34;https://github.com/asciimoo/searx/wiki/Installation&#34;&gt;https://github.com/asciimoo/searx/wiki/Installation&lt;/a&gt;, but I&amp;rsquo;ll recount the steps here anyways.&lt;/p&gt;
+
+&lt;p&gt;Install packages (extra package: supervisor):&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-shell-session&#34;&gt;    sudo apt-get install git build-essential libxslt-dev python-dev python-virtualenv python-pybabel zlib1g-dev supervisor
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Install searx:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-shell-session&#34;&gt;    cd /usr/localsudo 
+    git clone https://github.com/asciimoo/searx.git
+    sudo useradd searx -d /usr/local/searx
+    sudo chown searx:searx -R /usr/local/searx
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Install dependencies in a virtualenv (extra package: gunicorn):&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-shell-session&#34;&gt;    sudo -u searx -icd /usr/local/searx
+    virtualenv searx-ve. 
+    ./searx-ve/bin/activate
+    pip install -r requirements.txt
+    pip install gunicorn
+    python setup.py install
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Configure secretkey:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-shell-session&#34;&gt;    sed -i -e &amp;quot;s/ultrasecretkey/`openssl rand -hex 16`/g&amp;quot; searx/settings.yml
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Make a configuration file:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-shell-session&#34;&gt;    sudo touch /etc/supervisor/conf.d/searx.conf
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Edit the above conf to include:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-ini&#34;&gt;    [program:searx]
+    command=/usr/local/searx/searx-ve/bin/gunicorn searx.webapp:app
+    directory=/usr/local/searx/
+    user=searx
+    group=searx
+    autostart=true
+    autorestart=true
+    stdout_logfile=/var/log/supervisor/%(program_name)s-access.log
+    stderr_logfile=/var/log/supervisor/%(program_name)s-error.log
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Then start the supervisor service:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-shell-session&#34;&gt;    sudo service supervisor start
+&lt;/code&gt;&lt;/pre&gt;
+</description>
+    </item>
+    
+  </channel>
+</rss>

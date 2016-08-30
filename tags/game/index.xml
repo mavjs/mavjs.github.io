@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Game on Ye Myat Kaung (Maverick)</title>
+    <link>https://mavjs.org/tags/game/</link>
+    <description>Recent content in Game on Ye Myat Kaung (Maverick)</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-gb</language>
+    <copyright>&amp;copy; 2016 Ye Myat Kaung (Maverick)</copyright>
+    <lastBuildDate>Fri, 14 Nov 2014 14:26:00 +0000</lastBuildDate>
+    <atom:link href="https://mavjs.org/tags/game/index.xml" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>World of Warcraft on Fedora 20 via wine</title>
+      <link>https://mavjs.org/post/world-of-warcraft-on-f20-via-wine/</link>
+      <pubDate>Fri, 14 Nov 2014 14:26:00 +0000</pubDate>
+      
+      <guid>https://mavjs.org/post/world-of-warcraft-on-f20-via-wine/</guid>
+      <description>&lt;p&gt;Install wine:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-shell-session&#34;&gt;    # sudo yum install wine
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Download World of Warcraft Setup Installer from &lt;a href=&#34;https://us.battle.net/account/download/?show=wow&#34;&gt;https://us.battle.net/account/download/?show=wow&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;Run the installer with wine:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-shell-session&#34;&gt;    # cd ~/Downloads/
+    # wine World-of-Warcraft-Setup-enGB.exe
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;After the installation completes, it will ask you to login to your Battlenet Account. Instead, quit the application. Then tell it to use software rendered OpenGL by executing (it has a bug where the interface is just black canvas on some intel cards):&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-shell-session&#34;&gt;    % export LIBGL_ALWAYS_SOFTWARE=1
+    % wine ~/.wine/drive_c/Program\ Files\ (x86)/Battle.net/Battle.net\ Launcher.exe
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Battlenet actually allows you to play even though it hasn&amp;rsquo;t finished downloading if it has reached a certain downloaded size. Either wait to finish or open the game. When you run it the first time it will take a while and FPS is not that great. Quit the game. Modify &lt;strong&gt;SET gxApi &amp;ldquo;D3D9&amp;rdquo;&lt;/strong&gt; to &lt;strong&gt;SET gxApi &amp;ldquo;Opengl&amp;rdquo;&lt;/strong&gt; in the following file:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-shell-session&#34;&gt;    $ ~/.wine/drive_c/Program\ Files\ (x86)/World\ of\ Warcraft/WTF/Config.wtf
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;After that your game should work in decent FPS.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Disclaimer&lt;/strong&gt;:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Have not tried the gameplay yet, since my subscription expired. :-(&lt;/li&gt;
+&lt;li&gt;Fedora 20 running on a 13&amp;rdquo;, 2.8Ghz retina macbookpro, 2013 edition.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Sources&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;https://appdb.winehq.org/objectManager.php?sClass=version&amp;amp;iId=30545&#34;&gt;https://appdb.winehq.org/objectManager.php?sClass=version&amp;amp;iId=30545&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;http://www.webupd8.org/2014/10/partial-workaround-for-black-distorted.html&#34;&gt;http://www.webupd8.org/2014/10/partial-workaround-for-black-distorted.html&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Compiling Voxelands on Mac OSX</title>
+      <link>https://mavjs.org/post/compiling-voxelands-on-mac-osx/</link>
+      <pubDate>Fri, 26 Sep 2014 22:25:00 +0000</pubDate>
+      
+      <guid>https://mavjs.org/post/compiling-voxelands-on-mac-osx/</guid>
+      <description>
+
+&lt;h1 id=&#34;what-is-voxelands&#34;&gt;What is Voxelands?&lt;/h1&gt;
+
+&lt;p&gt;&lt;a href=&#34;http://voxelands.com&#34;&gt;Voxelands&lt;/a&gt; - the Fun-Focused Free Software Voxel World Game. Voxelands is a sandbox construction game based on &lt;a href=&#34;http://minetest.net&#34;&gt;Minetest&lt;/a&gt;, which was inspired by earlier &amp;ldquo;voxel world&amp;rdquo; games such as Infiniminer.&lt;/p&gt;
+
+&lt;p&gt;We already have the precompiled mac app for the latest stable release that you can install at: &lt;a href=&#34;http://voxelands.com/downloads/voxelands-1408.00-osx.dmg&#34;&gt;http://voxelands.com/downloads/voxelands-1408.00-osx.dmg&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Disclaimer:&lt;/strong&gt; The above &lt;strong&gt;voxelands-1408.00-os.dmg&lt;/strong&gt; would still need the mentions dependencies installed from brew below, with the exception of git, cmake, Xcode, Xcode Command Line Tools. This post is mostly meant for people that want the latest new features in the development branch. I&amp;rsquo;m working on a proper mac app that wouldn&amp;rsquo;t need to install dependencies, in the next release.&lt;/p&gt;
+
+&lt;p&gt;To start off with getting a voxelands-1408.00:next-os.dmg (which is the branch for the next release, where most fixes that didn&amp;rsquo;t make it to the latest stable release gets committed to), you&amp;rsquo;d need a few more softwares to help. First off, you need `Homebrew - The missing package manager for OSX &lt;a href=&#34;http://brew.sh&#34;&gt;http://brew.sh&lt;/a&gt;, to install it&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-shell-session&#34;&gt;    ruby -e &amp;quot;$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)&amp;quot;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;After installing brew, you need to install these dependencies (that
+are in the brew repositories):&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;libpng&lt;/li&gt;
+&lt;li&gt;libvorbis&lt;/li&gt;
+&lt;li&gt;libogg&lt;/li&gt;
+&lt;li&gt;jpeg-turbo&lt;/li&gt;
+&lt;li&gt;gettext&lt;/li&gt;
+&lt;li&gt;irrlicht&lt;/li&gt;
+&lt;li&gt;git&lt;/li&gt;
+&lt;li&gt;cmake&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Issue brew install on all of them&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-shell-session&#34;&gt;    brew install libpng libvorbis libogg jpeg-turbo gettext irrlicht git cmake
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;That will install the most needed dependencies for Voxelands on Mac OSX. But you will also need the &lt;a href=&#34;http://xquartz.macosforge.org/landing/&#34;&gt;XQuartz&lt;/a&gt; - A version of the X.Org X Window System that runs on Mac OSX, `&lt;a href=&#34;https://developer.apple.com/xcode/downloads&#34;&gt;Xcode&lt;/a&gt;, &lt;a href=&#34;https://developer.apple.com/downloads/index.action&#34;&gt;Command Line Tools for Xcode&lt;/a&gt; and you can start compiling.&lt;/p&gt;
+
+&lt;p&gt;Get the voxelands source from git first (voxelands&amp;rsquo; former name was minetest-classic)&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-shell-session&#34;&gt;    git clone https://gitorious.org/minetest-classic/minetest-classic.git
+    cd minetest-classic
+    git checkout next
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Let&amp;rsquo;s start off with telling &lt;a href=&#34;http://www.cmake.org&#34;&gt;cmake&lt;/a&gt; - which is the cross-platform, open-source build system that Voxelands uses, about the extra dependencies that we installed via brew (do make sure you supply the correct paths with the versions).&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-shell-session&#34;&gt;    cmake -DIRRLICHT_INCLUDE_DIR=/usr/local/Cellar/irrlicht/1.8.1/include/irrlicht/ \
+    -DIRRLICHT_LIBRARY=/usr/local/Cellar/irrlicht/1.8.1/lib/libIrrlicht.a \
+    -DJPEG_INCLUDE_DIR=/usr/local/Cellar/jpeg-turbo/1.3.1/include \
+    -DJPEG_LIBRARY=/usr/local/Cellar/jpeg-turbo/1.3.1/lib/libturbojpeg.a \
+    -DBUILD_SERVER=0 -DRUN_IN_PLACE=0 \
+    -DCUSTOM_GETTEXT_PATH=/usr/local/Cellar/gettext/0.19.2/ \
+    -DCMAKE_OSX_ARCHITECTURES=x86_64 \-G Xcode .
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;It will make a &lt;strong&gt;voxelands.xcodeproj&lt;/strong&gt; inside the git cloned project directory. Then we can build using Xcode commandline tools.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-shell-session&#34;&gt;    xcodebuild -verbose -project voxelands.xcodeproj -target package
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;It tells xcodebuild command to build the project with target of package, which makes the .dmg file that we will get in the end, if it successfully compiles.&lt;/p&gt;
+
+&lt;p&gt;If you need help or just want to hang out, come onto our IRC channel &lt;a href=&#34;http://webchat.freenode.net/?channels=%23voxelands&amp;amp;uio=d4&#34;&gt;#voxelands at chat.freenode.net&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;UPDATED:&lt;/strong&gt; forgot to add jpeg-turbo as one of the dependencies&lt;/p&gt;
+</description>
+    </item>
+    
+  </channel>
+</rss>

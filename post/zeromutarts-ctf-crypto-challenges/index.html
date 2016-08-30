@@ -1,0 +1,418 @@
+<!DOCTYPE html>
+<html lang="en-gb">
+<head>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="theme" content="hugo-academic">
+    <meta name="generator" content="Hugo 0.17-DEV" />
+    <meta name="author" content="Ye Myat Kaung">
+    <meta name="description" content="Computer Security Enthusiast">
+
+    <link rel="stylesheet" href="https://mavjs.org/css/highlight.min.css">
+    <link rel="stylesheet" href="https://mavjs.org/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://mavjs.org/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://mavjs.org/css/academicons.min.css">
+    <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Lato:400,700|Merriweather|Roboto+Mono">
+    <link rel="stylesheet" href="https://mavjs.org/css/hugo-academic.css">
+    
+
+
+    <link rel="shortcut icon" href="https://mavjs.org/img/favicon.ico" type="image/x-icon">
+    <link rel="canonical" href="https://mavjs.org/post/zeromutarts-ctf-crypto-challenges/">
+
+    <title>Zeromutarts CTF Crypto Challenges | Ye Myat Kaung (Maverick)</title>
+
+</head>
+<body id="top">
+
+
+<nav class="navbar navbar-default navbar-fixed-top" id="navbar-main">
+    <div class="container">
+
+        
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target=".navbar-collapse" aria-expanded="false">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="https://mavjs.org/">Ye Myat Kaung (Maverick)</a>
+        </div>
+
+        
+        <div class="collapse navbar-collapse" id="#navbar-collapse-1">
+
+            
+            <ul class="nav navbar-nav navbar-right">
+                
+                <li class="nav-item"><a href="https://mavjs.org/#top">Home</a></li>
+                
+                <li class="nav-item"><a href="https://mavjs.org/post/">Posts</a></li>
+                
+                <li class="nav-item"><a href="https://mavjs.org/#projects">Projects</a></li>
+                
+                <li class="nav-item"><a href="https://mavjs.org/#contact">Contact</a></li>
+                
+            </ul>
+
+        </div>
+    </div>
+</nav>
+
+<div class="container">
+
+    <article class="article" itemscope itemtype="http://schema.org/Article">
+
+        
+
+        <h1 itemprop="name">Zeromutarts CTF Crypto Challenges</h1>
+
+        
+
+<div class="article-metadata">
+
+    <span class="article-date">
+        <time datetime="2014-01-27 15:08:00 &#43;0000 UTC" itemprop="datePublished">Mon, Jan 27, 2014</time>
+    </span>
+
+    
+    
+    
+    <span class="article-tags">
+        <i class="fa fa-tags"></i>
+        
+        <a class="article-tag-link" href="https://mavjs.org/tags/writeups">writeups</a>, 
+        
+        <a class="article-tag-link" href="https://mavjs.org/tags/zeromutarts">zeromutarts</a>, 
+        
+        <a class="article-tag-link" href="https://mavjs.org/tags/ctf">CTF</a>, 
+        
+        <a class="article-tag-link" href="https://mavjs.org/tags/crypto">crypto</a>
+        
+    </span>
+    
+    
+
+    
+        
+<div class="share-box">
+    <ul class="share">
+        <li>
+            <a class="facebook" href="https://www.facebook.com/sharer.php?u=https%3a%2f%2fmavjs.org%2fpost%2fzeromutarts-ctf-crypto-challenges%2f" target="_blank">
+                <i class="fa fa-facebook"></i>
+            </a>
+        </li>
+        <li>
+            <a class="twitter" href="https://twitter.com/intent/tweet?text=Zeromutarts%20CTF%20Crypto%20Challenges&amp;url=https%3a%2f%2fmavjs.org%2fpost%2fzeromutarts-ctf-crypto-challenges%2f" target="_blank">
+                <i class="fa fa-twitter"></i>
+            </a>
+        </li>
+        <li>
+            <a class="linkedin" href="https://www.linkedin.com/shareArticle?mini=true&amp;url=https%3a%2f%2fmavjs.org%2fpost%2fzeromutarts-ctf-crypto-challenges%2f&amp;title=Zeromutarts%20CTF%20Crypto%20Challenges" target="_blank">
+                <i class="fa fa-linkedin"></i>
+            </a>
+        </li>
+        <li>
+            <a class="weibo" href="http://service.weibo.com/share/share.php?url=https%3a%2f%2fmavjs.org%2fpost%2fzeromutarts-ctf-crypto-challenges%2f&amp;title=Zeromutarts%20CTF%20Crypto%20Challenges" target="_blank">
+                <i class="fa fa-weibo"></i>
+            </a>
+        </li>
+        <li>
+            <a class="email" href="mailto:?subject=Zeromutarts%20CTF%20Crypto%20Challenges&amp;body=https%3a%2f%2fmavjs.org%2fpost%2fzeromutarts-ctf-crypto-challenges%2f">
+                <i class="fa fa-envelope"></i>
+            </a>
+        </li>
+    </ul>
+</div>
+
+
+    
+
+</div>
+
+
+        <div class="article-style" itemprop="articleBody">
+            
+
+<h2 id="the-magic-of-rsa-100">The magic of rsa (100)</h2>
+
+<pre><code>You were able to hear some whispering on the last crypto party!
+*whisper* $d$ is 35181901. Keep it secret or we are doomed!
+</code></pre>
+
+<p>We were given 2 files for the challenge.</p>
+
+<h3 id="1-rsa-py">1) rsa.py</h3>
+
+<pre><code class="language-python">    #!/usr/bin/env python
+    import sys
+    n= 65354147
+    e = 13
+    d = ??
+
+    f = open( sys.argv[1] , &quot;r&quot; )
+        for line in f: 
+        line = int(line.strip())
+        # you'll have to insert the decrypt function for each line(number) here!
+        #dec = ...
+        print chr(dec)
+</code></pre>
+
+<h3 id="2-rsa-txt">2) rsa.txt</h3>
+
+<pre><code class="language-text">    32588732
+    56947340
+    16730166
+    16529146
+    17037091
+    9958499
+    18895626
+    49410873
+    58063242
+    16529146
+    18895626
+    30273022
+    58063242
+    30273022
+    60194095
+    9956852
+    58063242
+    44337129
+    16730166
+    5059543
+    40999214
+    39158796
+    5059543
+    58063242
+    54302449
+    9958499
+    58063242
+    8646641
+    16730166
+    51307370
+    16730166
+    57845836
+    16730166
+    34996934
+    32762958
+</code></pre>
+
+<p>If you read up about <a href="https://en.wikipedia.org/wiki/RSA_%28cryptosystem%29#Decryption">RSA decryption</a> on Wikipedia, it&rsquo;s pretty
+simple and straightforward to solve this challenge. You need $C$ =
+ciphertext (we got loads of it there in rsa.txt, just need to use one by
+one), $d$ = private key exponent (we got that as well), $n$ = modulus for
+both private and public keys. Thus, $M \equiv C^{d} \bmod n$</p>
+
+<p>Here, I used <a href="https://cloud.sagemath.com">sagemath</a> cloud application to solve it as follows. You could actually save the following into a python script and run it.</p>
+
+<pre><code class="language-python">    n = 65354147
+    d = 35181901
+    ctuple = [32588732,56947340,16730166,16529146,17037091,9958499,18895626,49410873,
+    58063242,16529146,18895626,30273022,58063242,30273022,60194095,9956852,58063242,
+    44337129,16730166,5059543,40999214,39158796,5059543,58063242,54302449,9958499,5806
+    3242,8646641,16730166,51307370,16730166,57845836,16730166,34996934,32762958]
+    result = &quot;&quot;
+
+    for i in ctuple:
+        lol = pow(i, d, n)
+        result += chr(lol)
+    print &quot;Result for http://zeromutarts.de/task/rsa_magic : &quot; + result
+</code></pre>
+
+<h2 id="rivest-shamir-adleman-250">rivest-shamir-adleman (250)</h2>
+
+<pre><code>*This one is important, we have no clue how to decrypt the secret message! Can you help us?*
+</code></pre>
+
+<p>We were given 2 files for this challenge as well.</p>
+
+<h3 id="1-rivest-py">1) rivest.py</h3>
+
+<pre><code class="language-python">    #!/usr/bin/env python
+    import sys
+    n= 80646413
+    e = 5
+
+    # You'll have to find the d yourself..
+    d = unknown
+
+    f = open( sys.argv[1] , &quot;r&quot; )
+    for line in f: 
+        line = int(line.strip())
+        # you'll have to insert the decrypt function for each line(number) here!
+        #dec = ...
+        print chr(dec)
+
+    # might come handy
+    def xgcd(a,b):
+        &quot;&quot;&quot;Extended GCD:
+        Returns (gcd, x, y) where gcd is the greatest common divisor of a and b
+        with the sign of b if b is nonzero, and with the sign of a if b is 0.
+        The numbers x,y are such that gcd = ax+by.&quot;&quot;&quot;
+        prevx, x = 1, 0;  prevy, y = 0, 1
+        while b:
+            q, r = divmod(a,b)
+            x, prevx = prevx - q*x, x
+            y, prevy = prevy - q*y, y
+            a, b = b, r
+        return a, prevx, prevy
+
+    def modinv(a, m):
+        &quot;&quot;&quot;Modular multiplicative inverse, i.e. a^-1 = 1 (mod m)&quot;&quot;&quot;
+        a, u, v = xgcd(a, m)
+        if a &lt;&gt; 1:
+            raise Exception('No inverse: %d (mod %d)' % (a, m))
+        return u
+</code></pre>
+
+<h3 id="2-rivest-txt">2) rivest.txt</h3>
+
+<pre><code class="language-text">    72895864
+    15633602
+    38820479
+    60303684
+    7458706
+    60299530
+    20682371
+    54642689
+    26066811
+    32615038
+    35349196
+    76400140
+    38820479
+    56463813
+    80491201
+    76400140
+    35349196
+    69567074
+    26066811
+    76400140
+    74270178
+    76127647
+    76127647
+    15633602
+    76400140
+    60303684
+    38820479
+    56463813
+    60303684
+    76400140
+    72844764
+    76127647
+    69302434
+    15633602
+    80491201
+    76400140
+    6809712
+    26066811
+    76400140
+    42498798
+    60299530
+    76127647
+    69302434
+    80491201
+    33234011
+</code></pre>
+
+<p>This time we seriously need sagemath to solve it. :) Since we don&rsquo;t know the $d$ to decrypt the messages for this challenge, we first need to
+find the $p$ &amp; $q$ to get $d$. The most straightforward way to get that is to
+use <a href="https://en.wikipedia.org/wiki/Fermat%27s_factorization_method">Fermat&rsquo;s Factorization method</a>.</p>
+
+<p>I used the formula from here: <a href="http://facthacks.cr.yp.to/fermat.html">http://facthacks.cr.yp.to/fermat.html</a> to
+get $p$ &amp; $q$.</p>
+
+<pre><code class="language-python">    n = 80646413
+    e = 5
+    ctuple = [72895864,15633602,38820479,60303684,7458706,60299530,20682371,54642689,
+    26066811,32615038,35349196,76400140,38820479,56463813,80491201,76400140,35349196,
+    69567074,26066811,76400140,74270178,76127647,76127647,15633602,76400140,60303684,
+    38820479,56463813,60303684,76400140,72844764,76127647,69302434,15633602,80491201,
+    76400140,6809712,26066811,76400140,42498798,60299530,76127647,69302434,80491201,
+    33234011]
+    def fermatfactor(N):
+       if N &lt;= 0: return [N]
+       if is_even(N): return [2,N/2]
+       a = ceil(sqrt(N))
+       while not is_square(a^2-N):
+         a = a + 1
+       b = sqrt(a^2-N)
+       return [a - b,a + b]
+    p, q = fermatfactor(n)
+
+    phi=(p-1)*(q-1)
+    d=pow(e,-1,phi)
+
+    result = &quot;&quot;
+    for i in ctuple:
+        lol=pow(i,d,n)
+        result+=chr(lol)
+    print &quot;Result for result http://zeromutarts.de/task/rivest-shamir-adleman : &quot; + result
+</code></pre>
+
+        </div>
+
+    </article>
+
+    <nav>
+    <ul class="pager">
+        
+        <li class="previous"><a href="https://mavjs.org/post/analysis-of-iwebspace-android/"><span aria-hidden="true">&larr;</span> Analysis of iWebSpace Android Application</a></li>
+        
+
+        
+        <li class="next"><a href="https://mavjs.org/post/nullcon-hackim-2014-forensics-5-writeup/">[Nullcon HackIM 2014] Forensics 5 Writeup <span aria-hidden="true">&rarr;</span></a></li>
+        
+    </ul>
+</nav>
+
+    
+<section id="comments">
+    <div id="disqus_thread">
+        
+    </div>
+</section>
+
+
+
+</div>
+<footer class="site-footer">
+    <div class="container">
+        <p class="powered-by">
+
+            &copy; 2016 Ye Myat Kaung (Maverick) &middot; 
+
+            Powered by the <a href="https://github.com/gcushen/hugo-academic" target="_blank">Academic theme</a> for <a href="http://gohugo.io" target="_blank">Hugo</a>.
+
+            <span class="pull-right"><a href="#" id="back_to_top"><span class="button_icon"><i class="fa fa-chevron-up fa-2x" aria-hidden="true"></i></span></a></span>
+
+        </p>
+    </div>
+</footer>
+
+        <script src="//cdnjs.cloudflare.com/ajax/libs/gsap/1.18.4/TweenMax.min.js"></script>
+        <script src="//cdnjs.cloudflare.com/ajax/libs/gsap/latest/plugins/ScrollToPlugin.min.js"></script>
+        <script src="https://mavjs.org/js/jquery-1.12.3.min.js"></script>
+        <script src="https://mavjs.org/js/bootstrap.min.js"></script>
+        <script src="https://mavjs.org/js/hugo-academic.js"></script>
+        
+
+        
+
+        
+        <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.3.0/highlight.min.js"></script>
+        <script>hljs.initHighlightingOnLoad();</script>
+
+        
+        
+        <script type="text/x-mathjax-config">
+            MathJax.Hub.Config({ tex2jax: { inlineMath: [['$','$'], ['\\(','\\)']] } });
+        </script>
+        <script async src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS_CHTML"></script>
+        
+
+    </body>
+</html>
+

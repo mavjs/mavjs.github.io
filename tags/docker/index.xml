@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Docker on Ye Myat Kaung (Maverick)</title>
+    <link>https://mavjs.org/tags/docker/</link>
+    <description>Recent content in Docker on Ye Myat Kaung (Maverick)</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-gb</language>
+    <copyright>&amp;copy; 2016 Ye Myat Kaung (Maverick)</copyright>
+    <lastBuildDate>Sun, 10 May 2015 15:50:00 +0000</lastBuildDate>
+    <atom:link href="https://mavjs.org/tags/docker/index.xml" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>Running GUI apps from Fedora Docker containers</title>
+      <link>https://mavjs.org/post/running-gui-apps-from-fedora-docker-containers/</link>
+      <pubDate>Sun, 10 May 2015 15:50:00 +0000</pubDate>
+      
+      <guid>https://mavjs.org/post/running-gui-apps-from-fedora-docker-containers/</guid>
+      <description>&lt;p&gt;After reading &lt;a href=&#34;https://twitter.com/jessfraz&#34;&gt;Jessie Frazelle&lt;/a&gt;&amp;rsquo;s &lt;a href=&#34;https://blog.jessfraz.com/post/docker-containers-on-the-desktop&#34;&gt;Docker Containers on the Desktop&lt;/a&gt; post I was quite interested in making some Fedora image based docker containers for some apps I want to use that I wouldn&amp;rsquo;t normally install on my main machines, like Google Chrome with the Google Talk plugins and flash. So, I did make one with chrome and the talk plugin and followed the guide on Jessie&amp;rsquo;s blog to run the GUI app, it worked, &lt;em&gt;but&lt;/em&gt; there was no sound.&lt;/p&gt;
+
+&lt;p&gt;But of course, I forgot Fedora use PulseAudio, so I looked for a solution on the internet as usual and stumbled upon a stackoverflow question: &lt;a href=&#34;https://stackoverflow.com/questions/28985714/run-apps-using-audio-in-a-docker-container&#34;&gt;qt - run apps using audio in a docker container&lt;/a&gt; and now has a working Fedora docker container which runs Google Chrome with the Google Talk plugin.&lt;/p&gt;
+
+&lt;p&gt;Dockerfile:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;FROM fedora:latest
+MAINTAINER &amp;quot;Ye Myat Kaung (Maverick)&amp;quot; &amp;lt;mavjs@mavjs.org&amp;gt;
+
+RUN yum install https://dl.google.com/linux/direct/google-chrome-stable_current_x86_64.rpm -y &amp;amp;&amp;amp; \
+yum install https://dl.google.com/linux/direct/google-talkplugin_current_x86_64.rpm -y
+
+ENTRYPOINT [ &amp;quot;/usr/bin/google-chrome&amp;quot; ]
+CMD [ &amp;quot;--user-data-dir=/data&amp;quot;] 
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Docker command to run container:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;sudo docker run -it --rm\
+    --net host \
+    --cpuset 0 \
+    --memory 512mb \
+    -v /tmp/.X11-unix:/tmp/.X11-unix \
+    -e DISPLAY=unix$DISPLAY \
+    -v /dev/snd:/dev/snd --privileged \
+    -v /dev/shm:/dev/shm \
+    -v /etc/machine-id:/etc/machine-id \
+    -v /var/lib/dbus:/var/lib/dbus \
+    -v /run/user/`id -u`/pulse/native:/run/user/`id -u`/pulse/native \
+    -v ~/.pulse:/home/$dockerUsername/.pulse \
+    --name chrome \
+    mavjs/chrome
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;My Fedora Dockerfiles can be found on my github &amp;amp; docker images on docker registery: &lt;a href=&#34;https://github.com/mavjs/fedora-dockerfiles&#34;&gt;fedora-dockerfiles&lt;/a&gt; &amp;amp; &lt;a href=&#34;https://hub.docker.com&#34;&gt;docker hub&lt;/a&gt;.&lt;/p&gt;
+</description>
+    </item>
+    
+  </channel>
+</rss>

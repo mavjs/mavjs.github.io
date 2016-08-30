@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="en-gb">
+<head>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="theme" content="hugo-academic">
+    <meta name="generator" content="Hugo 0.17-DEV" />
+    <meta name="author" content="Ye Myat Kaung">
+    <meta name="description" content="Computer Security Enthusiast">
+
+    <link rel="stylesheet" href="https://mavjs.org/css/highlight.min.css">
+    <link rel="stylesheet" href="https://mavjs.org/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://mavjs.org/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://mavjs.org/css/academicons.min.css">
+    <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Lato:400,700|Merriweather|Roboto+Mono">
+    <link rel="stylesheet" href="https://mavjs.org/css/hugo-academic.css">
+    
+
+
+    <link rel="shortcut icon" href="https://mavjs.org/img/favicon.ico" type="image/x-icon">
+    <link rel="canonical" href="https://mavjs.org/post/running-gui-apps-from-fedora-docker-containers/">
+
+    <title>Running GUI apps from Fedora Docker containers | Ye Myat Kaung (Maverick)</title>
+
+</head>
+<body id="top">
+
+
+<nav class="navbar navbar-default navbar-fixed-top" id="navbar-main">
+    <div class="container">
+
+        
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target=".navbar-collapse" aria-expanded="false">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="https://mavjs.org/">Ye Myat Kaung (Maverick)</a>
+        </div>
+
+        
+        <div class="collapse navbar-collapse" id="#navbar-collapse-1">
+
+            
+            <ul class="nav navbar-nav navbar-right">
+                
+                <li class="nav-item"><a href="https://mavjs.org/#top">Home</a></li>
+                
+                <li class="nav-item"><a href="https://mavjs.org/post/">Posts</a></li>
+                
+                <li class="nav-item"><a href="https://mavjs.org/#projects">Projects</a></li>
+                
+                <li class="nav-item"><a href="https://mavjs.org/#contact">Contact</a></li>
+                
+            </ul>
+
+        </div>
+    </div>
+</nav>
+
+<div class="container">
+
+    <article class="article" itemscope itemtype="http://schema.org/Article">
+
+        
+
+        <h1 itemprop="name">Running GUI apps from Fedora Docker containers</h1>
+
+        
+
+<div class="article-metadata">
+
+    <span class="article-date">
+        <time datetime="2015-05-10 15:50:00 &#43;0000 UTC" itemprop="datePublished">Sun, May 10, 2015</time>
+    </span>
+
+    
+    
+    
+    <span class="article-tags">
+        <i class="fa fa-tags"></i>
+        
+        <a class="article-tag-link" href="https://mavjs.org/tags/fedora">Fedora</a>, 
+        
+        <a class="article-tag-link" href="https://mavjs.org/tags/docker">Docker</a>, 
+        
+        <a class="article-tag-link" href="https://mavjs.org/tags/lxc">lxc</a>
+        
+    </span>
+    
+    
+
+    
+        
+<div class="share-box">
+    <ul class="share">
+        <li>
+            <a class="facebook" href="https://www.facebook.com/sharer.php?u=https%3a%2f%2fmavjs.org%2fpost%2frunning-gui-apps-from-fedora-docker-containers%2f" target="_blank">
+                <i class="fa fa-facebook"></i>
+            </a>
+        </li>
+        <li>
+            <a class="twitter" href="https://twitter.com/intent/tweet?text=Running%20GUI%20apps%20from%20Fedora%20Docker%20containers&amp;url=https%3a%2f%2fmavjs.org%2fpost%2frunning-gui-apps-from-fedora-docker-containers%2f" target="_blank">
+                <i class="fa fa-twitter"></i>
+            </a>
+        </li>
+        <li>
+            <a class="linkedin" href="https://www.linkedin.com/shareArticle?mini=true&amp;url=https%3a%2f%2fmavjs.org%2fpost%2frunning-gui-apps-from-fedora-docker-containers%2f&amp;title=Running%20GUI%20apps%20from%20Fedora%20Docker%20containers" target="_blank">
+                <i class="fa fa-linkedin"></i>
+            </a>
+        </li>
+        <li>
+            <a class="weibo" href="http://service.weibo.com/share/share.php?url=https%3a%2f%2fmavjs.org%2fpost%2frunning-gui-apps-from-fedora-docker-containers%2f&amp;title=Running%20GUI%20apps%20from%20Fedora%20Docker%20containers" target="_blank">
+                <i class="fa fa-weibo"></i>
+            </a>
+        </li>
+        <li>
+            <a class="email" href="mailto:?subject=Running%20GUI%20apps%20from%20Fedora%20Docker%20containers&amp;body=https%3a%2f%2fmavjs.org%2fpost%2frunning-gui-apps-from-fedora-docker-containers%2f">
+                <i class="fa fa-envelope"></i>
+            </a>
+        </li>
+    </ul>
+</div>
+
+
+    
+
+</div>
+
+
+        <div class="article-style" itemprop="articleBody">
+            <p>After reading <a href="https://twitter.com/jessfraz">Jessie Frazelle</a>&rsquo;s <a href="https://blog.jessfraz.com/post/docker-containers-on-the-desktop">Docker Containers on the Desktop</a> post I was quite interested in making some Fedora image based docker containers for some apps I want to use that I wouldn&rsquo;t normally install on my main machines, like Google Chrome with the Google Talk plugins and flash. So, I did make one with chrome and the talk plugin and followed the guide on Jessie&rsquo;s blog to run the GUI app, it worked, <em>but</em> there was no sound.</p>
+
+<p>But of course, I forgot Fedora use PulseAudio, so I looked for a solution on the internet as usual and stumbled upon a stackoverflow question: <a href="https://stackoverflow.com/questions/28985714/run-apps-using-audio-in-a-docker-container">qt - run apps using audio in a docker container</a> and now has a working Fedora docker container which runs Google Chrome with the Google Talk plugin.</p>
+
+<p>Dockerfile:</p>
+
+<pre><code>FROM fedora:latest
+MAINTAINER &quot;Ye Myat Kaung (Maverick)&quot; &lt;mavjs@mavjs.org&gt;
+
+RUN yum install https://dl.google.com/linux/direct/google-chrome-stable_current_x86_64.rpm -y &amp;&amp; \
+yum install https://dl.google.com/linux/direct/google-talkplugin_current_x86_64.rpm -y
+
+ENTRYPOINT [ &quot;/usr/bin/google-chrome&quot; ]
+CMD [ &quot;--user-data-dir=/data&quot;] 
+</code></pre>
+
+<p>Docker command to run container:</p>
+
+<pre><code>sudo docker run -it --rm\
+    --net host \
+    --cpuset 0 \
+    --memory 512mb \
+    -v /tmp/.X11-unix:/tmp/.X11-unix \
+    -e DISPLAY=unix$DISPLAY \
+    -v /dev/snd:/dev/snd --privileged \
+    -v /dev/shm:/dev/shm \
+    -v /etc/machine-id:/etc/machine-id \
+    -v /var/lib/dbus:/var/lib/dbus \
+    -v /run/user/`id -u`/pulse/native:/run/user/`id -u`/pulse/native \
+    -v ~/.pulse:/home/$dockerUsername/.pulse \
+    --name chrome \
+    mavjs/chrome
+</code></pre>
+
+<p>My Fedora Dockerfiles can be found on my github &amp; docker images on docker registery: <a href="https://github.com/mavjs/fedora-dockerfiles">fedora-dockerfiles</a> &amp; <a href="https://hub.docker.com">docker hub</a>.</p>
+
+        </div>
+
+    </article>
+
+    <nav>
+    <ul class="pager">
+        
+        <li class="previous"><a href="https://mavjs.org/post/f21-hidpi-on-retina-macbookpro/"><span aria-hidden="true">&larr;</span> Fedora 21 Workstation HiDPI on retina macbook pro</a></li>
+        
+
+        
+    </ul>
+</nav>
+
+    
+<section id="comments">
+    <div id="disqus_thread">
+        
+    </div>
+</section>
+
+
+
+</div>
+<footer class="site-footer">
+    <div class="container">
+        <p class="powered-by">
+
+            &copy; 2016 Ye Myat Kaung (Maverick) &middot; 
+
+            Powered by the <a href="https://github.com/gcushen/hugo-academic" target="_blank">Academic theme</a> for <a href="http://gohugo.io" target="_blank">Hugo</a>.
+
+            <span class="pull-right"><a href="#" id="back_to_top"><span class="button_icon"><i class="fa fa-chevron-up fa-2x" aria-hidden="true"></i></span></a></span>
+
+        </p>
+    </div>
+</footer>
+
+        <script src="//cdnjs.cloudflare.com/ajax/libs/gsap/1.18.4/TweenMax.min.js"></script>
+        <script src="//cdnjs.cloudflare.com/ajax/libs/gsap/latest/plugins/ScrollToPlugin.min.js"></script>
+        <script src="https://mavjs.org/js/jquery-1.12.3.min.js"></script>
+        <script src="https://mavjs.org/js/bootstrap.min.js"></script>
+        <script src="https://mavjs.org/js/hugo-academic.js"></script>
+        
+
+        
+
+        
+        <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.3.0/highlight.min.js"></script>
+        <script>hljs.initHighlightingOnLoad();</script>
+
+        
+        
+
+    </body>
+</html>
+

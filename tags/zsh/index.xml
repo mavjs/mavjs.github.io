@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Zsh on Ye Myat Kaung (Maverick)</title>
+    <link>https://mavjs.org/tags/zsh/</link>
+    <description>Recent content in Zsh on Ye Myat Kaung (Maverick)</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-gb</language>
+    <copyright>&amp;copy; 2016 Ye Myat Kaung (Maverick)</copyright>
+    <lastBuildDate>Sat, 27 Oct 2012 05:01:00 +0000</lastBuildDate>
+    <atom:link href="https://mavjs.org/tags/zsh/index.xml" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>Zsh Autocomplete Function to change and auto complete directories&#39; name</title>
+      <link>https://mavjs.org/post/zsh-autocomplete-function-to-change-and/</link>
+      <pubDate>Sat, 27 Oct 2012 05:01:00 +0000</pubDate>
+      
+      <guid>https://mavjs.org/post/zsh-autocomplete-function-to-change-and/</guid>
+      <description>
+
+&lt;p&gt;About some weeks ago, I was trying to find a way to alias my favourite directory (~/Programming/Pythons) in zsh, and it should show me the directories contained inside it. But aliasing doesn&amp;rsquo;t work, except to &lt;code&gt;cd&lt;/code&gt; me to that directory. Or a function can help me get into the directories inside ~/Programming/Pythons but I&amp;rsquo;d have to type out the directories&amp;rsquo; name manually. That wasn&amp;rsquo;t an option either.&lt;/p&gt;
+
+&lt;p&gt;So I turned to &amp;ldquo;Uncle Google&amp;rdquo; :P for it. Also what I remembered from Zsh is that it&amp;rsquo;s auto completion is really awesome. So I searched for &amp;ldquo;zsh autocomplete function&amp;rdquo; and read some stackoverflow examples and stuff. But I had some errors if I was using &lt;a href=&#34;https://github.com/robbyrussell/oh-my-zsh&#34;&gt;oh-my-zsh&lt;/a&gt;&amp;lsquo;s functions.zsh to store/write my zsh auto complete function in it.&lt;/p&gt;
+
+&lt;p&gt;What I did was, instead of writing that auto complete function inside oh-my-zsh&amp;rsquo;s functions.zsh, I wrote it directly inside .zshrc, like this:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;    function prog() { 
+        cd ~/Programming/Pythons/$1;
+        }
+
+    _prog() {
+        _files -W ~/Programming/Pythons;
+        }
+
+    compdef _prog prog
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;What this code actually does is that when you type &lt;code&gt;prog&lt;/code&gt; after sourcing your .zshrc file, it expands the defined directory, in here; &amp;lsquo;~/Programming/Pythons/&amp;rsquo; and the argument $1 is based on whatever directory you selected from the expansion of the directory from the function  &lt;code&gt;_prog()&lt;/code&gt;, like this;&lt;/p&gt;
+
+
+&lt;figure &gt;
+    
+        &lt;img src=&#34;https://mavjs.org/img/zsh-autocomplete-function-to-change-and_s1600_Selection_021.png&#34; /&gt;
+    
+    
+&lt;/figure&gt;
+
+
+&lt;p&gt;This exactly did what I needed. If you got awesome auto complete
+functions written, do share it at the comments. :)&lt;/p&gt;
+
+&lt;h2 id=&#34;resources&#34;&gt;Resources&lt;/h2&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;http://zsh.sourceforge.net/Guide/zshguide06.html&#34;&gt;http://zsh.sourceforge.net/Guide/zshguide06.html&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;http://stackoverflow.com/questions/10700012/zsh-autocomplete-function-based-on-2-arguments&#34;&gt;http://stackoverflow.com/questions/10700012/zsh-autocomplete-function-based-on-2-arguments&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://wiki.archlinux.org/index.php/Zsh#Command_Completion&#34;&gt;https://wiki.archlinux.org/index.php/Zsh#Command_Completion&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+    </item>
+    
+  </channel>
+</rss>

@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Steam on Ye Myat Kaung (Maverick)</title>
+    <link>https://mavjs.org/tags/steam/</link>
+    <description>Recent content in Steam on Ye Myat Kaung (Maverick)</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-gb</language>
+    <copyright>&amp;copy; 2016 Ye Myat Kaung (Maverick)</copyright>
+    <lastBuildDate>Sat, 14 Sep 2013 04:43:00 +0000</lastBuildDate>
+    <atom:link href="https://mavjs.org/tags/steam/index.xml" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>Steam fail to start</title>
+      <link>https://mavjs.org/post/steam-fail-to-start/</link>
+      <pubDate>Sat, 14 Sep 2013 04:43:00 +0000</pubDate>
+      
+      <guid>https://mavjs.org/post/steam-fail-to-start/</guid>
+      <description>&lt;p&gt;Last night I was playing some games on Steam and closed it after I finished playing. Then I browsed around the &lt;a href=&#34;https://www.humblebundle.com&#34;&gt;Humble Bundle&lt;/a&gt; and bought the Humble Indie Bundle 9 since I wanted  &lt;a href=&#34;http://www.markoftheninja.com&#34;&gt;Mark of the Ninja&lt;/a&gt;, so to redeem it I switched on Steam. But it wasn&amp;rsquo;t starting up. So, opened it from terminal and got some errors, but those were there since ages and doesn&amp;rsquo;t actually affected the start up last time.&lt;/p&gt;
+
+&lt;p&gt;So, this morning, I was talking to a friend on IRC about it and he mentioned that you could just do&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-shell-session&#34;&gt;    /usr/bin/steam --reset
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;to reinstall and start again..and voilà it was indeed working again. :)&lt;/p&gt;
+
+&lt;p&gt;[Note]: Another friend suggested to restart the router, not sure how effective that would have been though. :P&lt;/p&gt;
+</description>
+    </item>
+    
+  </channel>
+</rss>

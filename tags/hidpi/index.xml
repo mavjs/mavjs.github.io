@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Hidpi on Ye Myat Kaung (Maverick)</title>
+    <link>https://mavjs.org/tags/hidpi/</link>
+    <description>Recent content in Hidpi on Ye Myat Kaung (Maverick)</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-gb</language>
+    <copyright>&amp;copy; 2016 Ye Myat Kaung (Maverick)</copyright>
+    <lastBuildDate>Mon, 06 Apr 2015 02:10:00 +0000</lastBuildDate>
+    <atom:link href="https://mavjs.org/tags/hidpi/index.xml" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>Fedora 21 Workstation HiDPI on retina macbook pro</title>
+      <link>https://mavjs.org/post/f21-hidpi-on-retina-macbookpro/</link>
+      <pubDate>Mon, 06 Apr 2015 02:10:00 +0000</pubDate>
+      
+      <guid>https://mavjs.org/post/f21-hidpi-on-retina-macbookpro/</guid>
+      <description>&lt;p&gt;I&amp;rsquo;ve been happily using F21 since it&amp;rsquo;s release announcement on &lt;a href=&#34;https://fedoramagazine.org/announcing-fedora-21&#34;&gt;Fedora Magazine&lt;/a&gt;,especially with the support for high resolution displays (HiDPI) since I&amp;rsquo;ve been converted back to using Fedora full time on my retina macbook pro. Although most of the GNOME apps work on my retina display, browsers and third-party apps are still lacking. Web pages&amp;rsquo; fonts seems too tiny and I&amp;rsquo;ve to zoom in on them to see them better all the time.&lt;/p&gt;
+
+&lt;p&gt;But recently I came across a nice resource - &lt;a href=&#34;https://wiki.archlinux.org/index.php/HiDPI&#34;&gt;https://wiki.archlinux.org/index.php/HiDPI&lt;/a&gt; about enabling HiDPI support on various apps. Mostly my main used apps daily are &lt;strong&gt;Firefox&lt;/strong&gt;, &lt;strong&gt;Chromium&lt;/strong&gt; and I&amp;rsquo;ve been trying to use &lt;a href=&#34;https://www.jetbrains.com/pycharm&#34;&gt;pycharm&lt;/a&gt; (&amp;amp; various JetBrains apps) but with HiDPI everything seems so small, so as suggested in the wiki, I changed my settings as follows:&lt;/p&gt;
+
+&lt;p&gt;On Firefox (play around with the value):&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;about:config -&amp;gt; layout.css.devPixelsPerPx -&amp;gt; 1.5
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Thunderbird (same as Firefox):&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;Edit -&amp;gt; Preferences -&amp;gt; Advanced -&amp;gt; Config Editor -&amp;gt; layout.css.devPixelsPerPx -&amp;gt; 1.5
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;PyCharm and any JetBrains products (the file should be in &lt;strong&gt;bin&lt;/strong&gt; sub
+directory in the folder you extracted the app):&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;&amp;lt;appname|appname64&amp;gt;.vmoptions -&amp;gt; -Dhidpi=true
+&lt;/code&gt;&lt;/pre&gt;
+
+
+&lt;figure &gt;
+    
+        &lt;img src=&#34;https://mavjs.org/img/CLionBefore.png&#34; /&gt;
+    
+    
+    &lt;figcaption&gt;
+        &lt;h4&gt;CLion before HiDPI tweak&lt;/h4&gt;
+        
+    &lt;/figcaption&gt;
+    
+&lt;/figure&gt;
+
+
+
+&lt;figure &gt;
+    
+        &lt;img src=&#34;https://mavjs.org/img/CLionAfter.png&#34; /&gt;
+    
+    
+    &lt;figcaption&gt;
+        &lt;h4&gt;CLion after HiDPI tweak&lt;/h4&gt;
+        
+    &lt;/figcaption&gt;
+    
+&lt;/figure&gt;
+
+</description>
+    </item>
+    
+  </channel>
+</rss>

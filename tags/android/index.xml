@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Android on Ye Myat Kaung (Maverick)</title>
+    <link>https://mavjs.org/tags/android/</link>
+    <description>Recent content in Android on Ye Myat Kaung (Maverick)</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-gb</language>
+    <copyright>&amp;copy; 2016 Ye Myat Kaung (Maverick)</copyright>
+    <lastBuildDate>Thu, 26 Sep 2013 07:41:00 +0000</lastBuildDate>
+    <atom:link href="https://mavjs.org/tags/android/index.xml" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>Analysis of iWebSpace Android Application</title>
+      <link>https://mavjs.org/post/analysis-of-iwebspace-android/</link>
+      <pubDate>Thu, 26 Sep 2013 07:41:00 +0000</pubDate>
+      
+      <guid>https://mavjs.org/post/analysis-of-iwebspace-android/</guid>
+      <description>&lt;p&gt;If you follow me enough on twitter (&lt;a href=&#34;https://twitter.com/@mavjs&#34;&gt;@mavjs&lt;/a&gt;), read my home page or follows my Fedora Ambassador wiki page, you&amp;rsquo;ll probably know that I study at the &lt;a href=&#34;http://apu.edu.my/&#34;&gt;Asia Pacific University of Technology and Innovation&lt;/a&gt;, Malaysia. This is my account of the n00b analysis done in my free time on the university&amp;rsquo;s android application.&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&#34;https://play.google.com/store/apps/details?id=edu.my.apiit.iWebSpace&#34;&gt;iWebSpace android application&lt;/a&gt; is, as quoted from its non-working Google Play page, &amp;ldquo;The Asia Pacific University APP provides convenient access to important information and to most of our services in your hand&amp;rdquo; - pretty cool and convenient for most students.&lt;/p&gt;
+
+&lt;p&gt;The only thing in my mind was to do an analysis before actually using it and mostly because this is the first time the university&amp;rsquo;s &lt;a href=&#34;http://www.apu.edu.my/cti&#34;&gt;Center of Technology and Innovation (CTI)&lt;/a&gt; - a R&amp;amp;D department, produced a mobile application. They have both an iPhone version and an android version. Since I don&amp;rsquo;t own a Macbook, I couldn&amp;rsquo;t do any analysis on the former version. And android was easier to read as I&amp;rsquo;m more familiar with Java. That being said about the app, let&amp;rsquo;s see my n00b findings.&lt;/p&gt;
+
+&lt;p&gt;1) I acquired the .apk from a friend. (I think it&amp;rsquo;s verion 1.0 and also I don&amp;rsquo;t own an android)
+2) Used &lt;a href=&#34;https://code.google.com/p/dex2jar/&#34;&gt;dex2jar&lt;/a&gt; to convert .apk to .jar.
+3) Used &lt;a href=&#34;http://jd.benow.ca/&#34;&gt;JD-GUI&lt;/a&gt; to open and read the .jar file.&lt;/p&gt;
+
+&lt;p&gt;First thing on my mind after opening the .jar file with JD-GUI was to see how the application was authentication the students. So, I scrolled through the code and found a Login class. Inside that Login class, it has a doLogin() method that logs you into the system, once you&amp;rsquo;ve your student ID and password supplied. I took a closer look at it and guess what I found?&lt;/p&gt;
+
+
+&lt;figure &gt;
+    
+        &lt;img src=&#34;https://mavjs.org/img/analysis-of-iwebspace-android_s1600_Selection_169.png&#34; /&gt;
+    
+    
+&lt;/figure&gt;
+
+
+&lt;p&gt;Yup, HTTP. Awesome. No comments there. Let&amp;rsquo;s move along. Assuming, the majority of the students don&amp;rsquo;t care about their student ID and password, this is pretty much fine, I guess. :P&lt;/p&gt;
+
+&lt;p&gt;The app has functions to show the students, their pending/paid fees, attendance, timetable and exam timetables. Pretty cool and convenient, definitely. So, I did further look at those functions. Firstly, let&amp;rsquo;s look at Fee function. The Fee class has an onCreate() function, that sets up the view. Further look at it suggests that, it uses a md5 string + student ID to query the Fee status of a particular student. Have a look.&lt;/p&gt;
+
+
+&lt;figure &gt;
+    
+        &lt;img src=&#34;https://mavjs.org/img/analysis-of-iwebspace-android_s1600_Selection_170.png&#34; /&gt;
+    
+    
+&lt;/figure&gt;
+
+
+&lt;p&gt;So, I took a closer look at the md5 string. The developers from CTI loves to keep their variable naming short (i, j, k, m, str1, str2). What does &lt;strong&gt;str1&lt;/strong&gt; actually md5-ing?&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-text&#34;&gt;int i is getting the YEAR
+int j is getting the MONTH
+int k is getting the DATE , which is day of the month
+int m is getting the HOUR_OF_DAY
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;From the above, if you reconstruct the md5 string with the current datetime on my system (26-09-2013 15:00:00), you get the following:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-python&#34;&gt;    md5(26 + 9 + &#39;Student ID&#39; + 2013 + 15) = &amp;quot;1640a3e25cc45123c5e234606aefbeb2&amp;quot;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;This is the same for the attendance function. The timetable and exam schedule functions aren&amp;rsquo;t that interesting, so I&amp;rsquo;ll not write about it here. When reported about the above, the only reply was that they will secure the web services. Does that mean they will keep sending the student ID and password over plain HTTP? I&amp;rsquo;ve no idea. :D I looked at the Google Play store page for the app and found that it couldn&amp;rsquo;t be found. What&amp;rsquo;s up?&lt;/p&gt;
+
+
+&lt;figure &gt;
+    
+        &lt;img src=&#34;https://mavjs.org/img/analysis-of-iwebspace-android_s1600_Selection_167.png&#34; /&gt;
+    
+    
+&lt;/figure&gt;
+
+
+&lt;p&gt;But the most interesting part about the whole app is the ActiveWebspace class. It seems to register the device using the application to the server so that they can see what&amp;rsquo;s the count of devices using the app and to send push notifications to them. The server is registered with some unique regId, name and email to a web application residing at the following:&lt;/p&gt;
+
+
+&lt;figure &gt;
+    
+        &lt;img src=&#34;https://mavjs.org/img/analysis-of-iwebspace-android_s1600_Selection_171.png&#34; /&gt;
+    
+    
+&lt;/figure&gt;
+
+
+&lt;p&gt;Once I found that URL, the only logical thing for me to do was to go one directory up, and see if I could find anything. And I did. This is what I found;&lt;/p&gt;
+
+
+&lt;figure &gt;
+    
+        &lt;img src=&#34;https://mavjs.org/img/analysis-of-iwebspace-android_s1600_Selection_164.png&#34; /&gt;
+    
+    
+&lt;/figure&gt;
+
+
+&lt;p&gt;There was no authentication or whatsoever needed to access that, although they&amp;rsquo;ve 403&amp;rsquo;d the service after some hour that I reported about it. The reply they sent me was accordingly;&lt;/p&gt;
+
+
+&lt;figure &gt;
+    
+        &lt;img src=&#34;https://mavjs.org/img/analysis-of-iwebspace-android_s1600_Selection_166.png&#34; /&gt;
+    
+    
+&lt;/figure&gt;
+
+
+&lt;p&gt;Cool story - &amp;ldquo;illustration purpose&amp;rdquo;. But it seems the message box can be used to send push notification from the look of the JavaScript function they were using:&lt;/p&gt;
+
+
+&lt;figure &gt;
+    
+        &lt;img src=&#34;https://mavjs.org/img/analysis-of-iwebspace-android_s1600_Selection_165.png&#34; /&gt;
+    
+    
+&lt;/figure&gt;
+
+
+&lt;p&gt;Hey, at least this isn&amp;rsquo;t as bad as the iMessage Chat for android where it could possibly &lt;a href=&#34;http://grahamcluley.com/2013/09/imessage-android-trust/&#34;&gt;download malicious&lt;/a&gt; stuff, right? :P
+I think I&amp;rsquo;ll probably only use those services via web. Maybe some other day when I&amp;rsquo;m free, I&amp;rsquo;ll try looking at the iPhone version and see what kind of stuff they coded in. XD
+On another note, this was all done on a &lt;a href=&#34;https://getfedora.org&#34;&gt;Fedora 19&lt;/a&gt; laptop. Ciao!&lt;/p&gt;
+</description>
+    </item>
+    
+  </channel>
+</rss>

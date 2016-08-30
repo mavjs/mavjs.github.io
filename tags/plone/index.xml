@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Plone on Ye Myat Kaung (Maverick)</title>
+    <link>https://mavjs.org/tags/plone/</link>
+    <description>Recent content in Plone on Ye Myat Kaung (Maverick)</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-gb</language>
+    <copyright>&amp;copy; 2016 Ye Myat Kaung (Maverick)</copyright>
+    <lastBuildDate>Sun, 09 Sep 2012 06:34:00 +0000</lastBuildDate>
+    <atom:link href="https://mavjs.org/tags/plone/index.xml" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>Introduction to Grok web application framework @ UCTI</title>
+      <link>https://mavjs.org/post/introduction-to-grok-web/</link>
+      <pubDate>Sun, 09 Sep 2012 06:34:00 +0000</pubDate>
+      
+      <guid>https://mavjs.org/post/introduction-to-grok-web/</guid>
+      <description>&lt;p&gt;Hey folks, we, the &lt;a href=&#34;http://fedora.my&#34;&gt;Fedora Malaysia&lt;/a&gt; community in conjunction with UCTI Free &amp;amp; Open Source Software SIG, have planned for an introductory workshop on &lt;a href=&#34;http://grok.zope.org&#34;&gt;Grok&lt;/a&gt;, a web application framework. It uses the &lt;a href=&#34;http://docs.zope.org/zopetoolkit&#34;&gt;Zope Toolkit (ZTK)&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;This session is aimed towards finding more python as well as zope/plone/FOSS developers  in Malaysia. The session is mentored by our very own &lt;a href=&#34;https://fedoraproject.org/wiki/Ambassadors&#34;&gt;Fedora Ambassador&lt;/a&gt;, &lt;a href=&#34;http://blog.kagesenshi.org&#34;&gt;Izhar a.k.a KageSenshi&lt;/a&gt;, who works at a local Plone support and service company called &lt;a href=&#34;http://www.inigo-tech.com&#34;&gt;Inigo Consulting&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Following are the details of the session:&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Date:&lt;/strong&gt; Sun 15th July, 2012&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Time:&lt;/strong&gt; 11:00-18:00&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Venue:&lt;/strong&gt; Level-2 Room-5 (L2-5), UCTI (Google Maps:
+&lt;a href=&#34;http://goo.gl/maps/dI7h)&#34;&gt;http://goo.gl/maps/dI7h)&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Fee:&lt;/strong&gt; Free Of Charge ;)&lt;/p&gt;
+
+&lt;p&gt;Folks coming to the session, (that&amp;rsquo;s you!), should bring along their own laptops (obviously!) and do not necessarily need to know &lt;a href=&#34;http://python.org&#34;&gt;Python&lt;/a&gt;, but need to have programming knowledge. Learning/knowing Python can be enhanced later on. Also need to know basic/intermediate HTML/CSS/JS.&lt;/p&gt;
+
+&lt;p&gt;Although, we prefer Unix/Linux systems like &lt;a href=&#34;https://fedoraproject.org&#34;&gt;Fedora&lt;/a&gt;, users are welcome to use any platform that they wish, provided that they know how to install Grok or any other software packages and troubleshoot problems if they arise.&lt;/p&gt;
+
+&lt;p&gt;We might be passing around some Fedora 17 if we happen to not finish them off at Malaysia OpenSource Conference. :P So, if you happen to know how to use *nix system and just need to boot it up to it, you can use a virtual machine to boot into a *nix system using the CDs/DVDs passed around or you can also ask me, for an ISO image before the session, if you need one. :)&lt;/p&gt;
+
+&lt;p&gt;See you all there!&lt;/p&gt;
+
+&lt;p&gt;Links:&lt;/p&gt;
+
+&lt;p&gt;Zope/Plone User Group Malaysia G+: &lt;a href=&#34;http://goo.gl/HcM7n&#34;&gt;http://goo.gl/HcM7n&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;Zope/Plone User Group Malaysia Maliling List: &lt;a href=&#34;http://groups.google.com/group/zplug-my&#34;&gt;http://groups.google.com/group/zplug-my&lt;/a&gt;&lt;/p&gt;
+</description>
+    </item>
+    
+  </channel>
+</rss>

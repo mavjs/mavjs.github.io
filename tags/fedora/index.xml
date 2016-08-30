@@ -1,0 +1,206 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Fedora on Ye Myat Kaung (Maverick)</title>
+    <link>https://mavjs.org/tags/fedora/</link>
+    <description>Recent content in Fedora on Ye Myat Kaung (Maverick)</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-gb</language>
+    <copyright>&amp;copy; 2016 Ye Myat Kaung (Maverick)</copyright>
+    <lastBuildDate>Sun, 10 May 2015 15:50:00 +0000</lastBuildDate>
+    <atom:link href="https://mavjs.org/tags/fedora/index.xml" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>Running GUI apps from Fedora Docker containers</title>
+      <link>https://mavjs.org/post/running-gui-apps-from-fedora-docker-containers/</link>
+      <pubDate>Sun, 10 May 2015 15:50:00 +0000</pubDate>
+      
+      <guid>https://mavjs.org/post/running-gui-apps-from-fedora-docker-containers/</guid>
+      <description>&lt;p&gt;After reading &lt;a href=&#34;https://twitter.com/jessfraz&#34;&gt;Jessie Frazelle&lt;/a&gt;&amp;rsquo;s &lt;a href=&#34;https://blog.jessfraz.com/post/docker-containers-on-the-desktop&#34;&gt;Docker Containers on the Desktop&lt;/a&gt; post I was quite interested in making some Fedora image based docker containers for some apps I want to use that I wouldn&amp;rsquo;t normally install on my main machines, like Google Chrome with the Google Talk plugins and flash. So, I did make one with chrome and the talk plugin and followed the guide on Jessie&amp;rsquo;s blog to run the GUI app, it worked, &lt;em&gt;but&lt;/em&gt; there was no sound.&lt;/p&gt;
+
+&lt;p&gt;But of course, I forgot Fedora use PulseAudio, so I looked for a solution on the internet as usual and stumbled upon a stackoverflow question: &lt;a href=&#34;https://stackoverflow.com/questions/28985714/run-apps-using-audio-in-a-docker-container&#34;&gt;qt - run apps using audio in a docker container&lt;/a&gt; and now has a working Fedora docker container which runs Google Chrome with the Google Talk plugin.&lt;/p&gt;
+
+&lt;p&gt;Dockerfile:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;FROM fedora:latest
+MAINTAINER &amp;quot;Ye Myat Kaung (Maverick)&amp;quot; &amp;lt;mavjs@mavjs.org&amp;gt;
+
+RUN yum install https://dl.google.com/linux/direct/google-chrome-stable_current_x86_64.rpm -y &amp;amp;&amp;amp; \
+yum install https://dl.google.com/linux/direct/google-talkplugin_current_x86_64.rpm -y
+
+ENTRYPOINT [ &amp;quot;/usr/bin/google-chrome&amp;quot; ]
+CMD [ &amp;quot;--user-data-dir=/data&amp;quot;] 
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Docker command to run container:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;sudo docker run -it --rm\
+    --net host \
+    --cpuset 0 \
+    --memory 512mb \
+    -v /tmp/.X11-unix:/tmp/.X11-unix \
+    -e DISPLAY=unix$DISPLAY \
+    -v /dev/snd:/dev/snd --privileged \
+    -v /dev/shm:/dev/shm \
+    -v /etc/machine-id:/etc/machine-id \
+    -v /var/lib/dbus:/var/lib/dbus \
+    -v /run/user/`id -u`/pulse/native:/run/user/`id -u`/pulse/native \
+    -v ~/.pulse:/home/$dockerUsername/.pulse \
+    --name chrome \
+    mavjs/chrome
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;My Fedora Dockerfiles can be found on my github &amp;amp; docker images on docker registery: &lt;a href=&#34;https://github.com/mavjs/fedora-dockerfiles&#34;&gt;fedora-dockerfiles&lt;/a&gt; &amp;amp; &lt;a href=&#34;https://hub.docker.com&#34;&gt;docker hub&lt;/a&gt;.&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Fedora 21 Workstation HiDPI on retina macbook pro</title>
+      <link>https://mavjs.org/post/f21-hidpi-on-retina-macbookpro/</link>
+      <pubDate>Mon, 06 Apr 2015 02:10:00 +0000</pubDate>
+      
+      <guid>https://mavjs.org/post/f21-hidpi-on-retina-macbookpro/</guid>
+      <description>&lt;p&gt;I&amp;rsquo;ve been happily using F21 since it&amp;rsquo;s release announcement on &lt;a href=&#34;https://fedoramagazine.org/announcing-fedora-21&#34;&gt;Fedora Magazine&lt;/a&gt;,especially with the support for high resolution displays (HiDPI) since I&amp;rsquo;ve been converted back to using Fedora full time on my retina macbook pro. Although most of the GNOME apps work on my retina display, browsers and third-party apps are still lacking. Web pages&amp;rsquo; fonts seems too tiny and I&amp;rsquo;ve to zoom in on them to see them better all the time.&lt;/p&gt;
+
+&lt;p&gt;But recently I came across a nice resource - &lt;a href=&#34;https://wiki.archlinux.org/index.php/HiDPI&#34;&gt;https://wiki.archlinux.org/index.php/HiDPI&lt;/a&gt; about enabling HiDPI support on various apps. Mostly my main used apps daily are &lt;strong&gt;Firefox&lt;/strong&gt;, &lt;strong&gt;Chromium&lt;/strong&gt; and I&amp;rsquo;ve been trying to use &lt;a href=&#34;https://www.jetbrains.com/pycharm&#34;&gt;pycharm&lt;/a&gt; (&amp;amp; various JetBrains apps) but with HiDPI everything seems so small, so as suggested in the wiki, I changed my settings as follows:&lt;/p&gt;
+
+&lt;p&gt;On Firefox (play around with the value):&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;about:config -&amp;gt; layout.css.devPixelsPerPx -&amp;gt; 1.5
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Thunderbird (same as Firefox):&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;Edit -&amp;gt; Preferences -&amp;gt; Advanced -&amp;gt; Config Editor -&amp;gt; layout.css.devPixelsPerPx -&amp;gt; 1.5
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;PyCharm and any JetBrains products (the file should be in &lt;strong&gt;bin&lt;/strong&gt; sub
+directory in the folder you extracted the app):&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;&amp;lt;appname|appname64&amp;gt;.vmoptions -&amp;gt; -Dhidpi=true
+&lt;/code&gt;&lt;/pre&gt;
+
+
+&lt;figure &gt;
+    
+        &lt;img src=&#34;https://mavjs.org/img/CLionBefore.png&#34; /&gt;
+    
+    
+    &lt;figcaption&gt;
+        &lt;h4&gt;CLion before HiDPI tweak&lt;/h4&gt;
+        
+    &lt;/figcaption&gt;
+    
+&lt;/figure&gt;
+
+
+
+&lt;figure &gt;
+    
+        &lt;img src=&#34;https://mavjs.org/img/CLionAfter.png&#34; /&gt;
+    
+    
+    &lt;figcaption&gt;
+        &lt;h4&gt;CLion after HiDPI tweak&lt;/h4&gt;
+        
+    &lt;/figcaption&gt;
+    
+&lt;/figure&gt;
+
+</description>
+    </item>
+    
+    <item>
+      <title>World of Warcraft on Fedora 20 via wine</title>
+      <link>https://mavjs.org/post/world-of-warcraft-on-f20-via-wine/</link>
+      <pubDate>Fri, 14 Nov 2014 14:26:00 +0000</pubDate>
+      
+      <guid>https://mavjs.org/post/world-of-warcraft-on-f20-via-wine/</guid>
+      <description>&lt;p&gt;Install wine:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-shell-session&#34;&gt;    # sudo yum install wine
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Download World of Warcraft Setup Installer from &lt;a href=&#34;https://us.battle.net/account/download/?show=wow&#34;&gt;https://us.battle.net/account/download/?show=wow&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;Run the installer with wine:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-shell-session&#34;&gt;    # cd ~/Downloads/
+    # wine World-of-Warcraft-Setup-enGB.exe
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;After the installation completes, it will ask you to login to your Battlenet Account. Instead, quit the application. Then tell it to use software rendered OpenGL by executing (it has a bug where the interface is just black canvas on some intel cards):&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-shell-session&#34;&gt;    % export LIBGL_ALWAYS_SOFTWARE=1
+    % wine ~/.wine/drive_c/Program\ Files\ (x86)/Battle.net/Battle.net\ Launcher.exe
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Battlenet actually allows you to play even though it hasn&amp;rsquo;t finished downloading if it has reached a certain downloaded size. Either wait to finish or open the game. When you run it the first time it will take a while and FPS is not that great. Quit the game. Modify &lt;strong&gt;SET gxApi &amp;ldquo;D3D9&amp;rdquo;&lt;/strong&gt; to &lt;strong&gt;SET gxApi &amp;ldquo;Opengl&amp;rdquo;&lt;/strong&gt; in the following file:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-shell-session&#34;&gt;    $ ~/.wine/drive_c/Program\ Files\ (x86)/World\ of\ Warcraft/WTF/Config.wtf
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;After that your game should work in decent FPS.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Disclaimer&lt;/strong&gt;:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Have not tried the gameplay yet, since my subscription expired. :-(&lt;/li&gt;
+&lt;li&gt;Fedora 20 running on a 13&amp;rdquo;, 2.8Ghz retina macbookpro, 2013 edition.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Sources&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;https://appdb.winehq.org/objectManager.php?sClass=version&amp;amp;iId=30545&#34;&gt;https://appdb.winehq.org/objectManager.php?sClass=version&amp;amp;iId=30545&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;http://www.webupd8.org/2014/10/partial-workaround-for-black-distorted.html&#34;&gt;http://www.webupd8.org/2014/10/partial-workaround-for-black-distorted.html&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Spreading Fedora Love - One At A Time</title>
+      <link>https://mavjs.org/post/spreading-fedora-love-one-at-a-time/</link>
+      <pubDate>Mon, 30 Apr 2012 03:32:00 +0000</pubDate>
+      
+      <guid>https://mavjs.org/post/spreading-fedora-love-one-at-a-time/</guid>
+      <description>&lt;p&gt;Disclaimer: This post is actually abit overdue. Was supposed to be up
+by Tuesday, but some stuff caught up.&lt;/p&gt;
+
+&lt;p&gt;Event Details&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;Time: 10:00 - 16:00&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Date: 23rd April, 2012&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Venue: UCTI&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Aim: Sharing knowledge/Teaching about GNU/Linux operating system(s).&lt;/p&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;This event was organized by &lt;a href=&#34;https://twitter.com/#!/rebelk0de&#34;&gt;rebelk0de&lt;/a&gt; and I,
+&lt;a href=&#34;https://fedoraproject.org/wiki/User:Mavjs&#34;&gt;Maverick&lt;/a&gt;. I have been contributing to Fedora Malaysia for about ~5-7months now, while rebelk0de has long since contributed/helped Fedora MY.&lt;/p&gt;
+
+&lt;p&gt;It was aimed at sparkling the GNU/Linux and FOSS enthusiasm in &lt;a href=&#34;http://ucti.edu.my&#34;&gt;UCTI&lt;/a&gt;, the event venue for FUDCon KL. Since UCTI had thousands of students, we had to start off with something smaller. So, we look for a small group of technical folks among the students, and we found the &lt;a href=&#34;https://sites.google.com/site/uctitechnicalassistantsteam&#34;&gt;UCTI Technical Assistants&lt;/a&gt; (TAs). TAs work in the UCTI computer labs to maintain approimately 300 computers running Windows operating system, daily.&lt;/p&gt;
+
+&lt;p&gt;And as recently, I, together with rebelk0de (as advisor) and a small group of 4 people, have been working hard to get UCTI Free &amp;amp; Open Source Software Special Interest Group (FOSS SIG) back into shape and in official status. Therefore, as a recruitment drive, to share knowledge about FOSS &amp;amp; GNU/Linux and to promote &amp;amp; expand the &amp;ldquo;Fedora Love&amp;rdquo; to the folks here in UCTI, I was there at the date of the event.&lt;/p&gt;
+
+&lt;p&gt;The event&amp;rsquo;s objective was to get Fedora and Ubuntu running with little or no headaches involved for beginners. And to understand abit about getting the installed operating system up and running with things the users needed getting installed on a as needed basis, so, mainly it was about teaching them how to make use of the &amp;ldquo;yum&amp;rdquo; and &amp;ldquo;apt-get&amp;rdquo; package management utilities.&lt;/p&gt;
+
+&lt;p&gt;The event started around 11:00 and was headed by rebelk0de. I was the assistant ;), mainly to help out when folks couldn&amp;rsquo;t catch up or something went wrong with their Fedora installs. I mainly shared my knowledge about &amp;ldquo;things to watch out for when installing Fedora&amp;rdquo;, especially, the different types of installation processes and some tips &amp;amp; tricks for beginners. I also distributed some leftover Fedora 16 CDs that I had from this year&amp;rsquo;s FAD, almost all of the folks that showed up got it.&lt;/p&gt;
+
+&lt;p&gt;We took off the event by installing &amp;ldquo;Fedora&amp;rdquo; on the virtualboxes which took approximately 30mins. The installation environments were inside virtualbox on Windows hosts. The reason to take this approach was that we would have needed a lot of extra precious hard disks for this one event, the machines retains their changes after reboot (so it was easier to use virtualboxes) and most of the folks who showed up have never installed/used either Fedora or Ubunt and GNU/Linux in general. Most of the time was taken on explanining the installation process and post installation configurations such as &amp;ldquo;adding their users to the sudoers if they forgot to add it&amp;rdquo; and about using the vi text editor.&lt;/p&gt;
+
+&lt;p&gt;Most of the tutorial/hands-on were done on Fedora. Ubuntu was just used to show how to use the package management utilities. We all had a lunch break around 14:00-15:00. And we wrapped up the event by 16:00.&lt;/p&gt;
+
+&lt;p&gt;rebelk0de and I have promised the folks to have more continuous classes for them in the future, and they have agreed. So, on with more classes/events then! :D&lt;/p&gt;
+
+&lt;p&gt;P.S. Will share the event photos after getting uploaded to Fedora My&amp;rsquo;s Albums. ;)&lt;/p&gt;
+
+&lt;p&gt;Edit: Here is the photos from the event: &lt;a href=&#34;https://plus.google.com/photos/109153510244556917522/albums/5735474293982143825&#34;&gt;GNU/Linux Intro Class at UCTI&lt;/a&gt;&lt;/p&gt;
+</description>
+    </item>
+    
+  </channel>
+</rss>
