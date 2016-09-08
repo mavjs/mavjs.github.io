@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en-gb">
+<head>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="theme" content="hugo-academic">
+    <meta name="generator" content="Hugo 0.17-DEV" />
+    <meta name="author" content="Ye Myat Kaung">
+    <meta name="description" content="Computer Security Enthusiast">
+
+    <link rel="stylesheet" href="https://mavjs.org/css/highlight.min.css">
+    <link rel="stylesheet" href="https://mavjs.org/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://mavjs.org/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://mavjs.org/css/academicons.min.css">
+    <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Lato:400,700|Merriweather|Roboto+Mono">
+    <link rel="stylesheet" href="https://mavjs.org/css/hugo-academic.css">
+    
+
+
+    <link rel="shortcut icon" href="https://mavjs.org/img/favicon.ico" type="image/x-icon">
+    <link rel="canonical" href="https://mavjs.org/tags/ctf/">
+
+    <title>Ctf | Ye Myat Kaung (Maverick)</title>
+
+</head>
+<body id="top">
+
+
+<nav class="navbar navbar-default navbar-fixed-top" id="navbar-main">
+    <div class="container">
+
+        
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target=".navbar-collapse" aria-expanded="false">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="https://mavjs.org/">Ye Myat Kaung (Maverick)</a>
+        </div>
+
+        
+        <div class="collapse navbar-collapse" id="#navbar-collapse-1">
+
+            
+            <ul class="nav navbar-nav navbar-right">
+                
+                <li class="nav-item"><a href="https://mavjs.org/#top">Home</a></li>
+                
+                <li class="nav-item"><a href="https://mavjs.org/post/">Posts</a></li>
+                
+                <li class="nav-item"><a href="https://mavjs.org/#projects">Projects</a></li>
+                
+                <li class="nav-item"><a href="https://mavjs.org/#contact">Contact</a></li>
+                
+            </ul>
+
+        </div>
+    </div>
+</nav>
+
+<div class="container">
+
+    
+    
+    <div>
+        <h2><a href="https://mavjs.org/post/nullcon-hackim-2014-forensics-2-writeup/">[Nullcon HackIM 2014] Forensics 2 Writeup</a></h2>
+        <div class="article-style"><p>Points: 200 Description: There was a zip file on the desktop. I can&rsquo;t remember the password for it. We saw a zip file named: &ldquo;null password.zip&rdquo; on the desktop. When opened, there are 2 files which are encrypted. So it was clear that we needed to crack the zip. First we looked at some hints from the challenge creator ;) #Hint for FOR2 &quot;User was too dumb to store the password in the protected zip file itself&quot; #HackIM #ForensicChallenge @nullcon @null0x00 &mdash; Prince Komal Boonlia (@boonlia) January 25, 2014 #Hint for FOR2 &quot;Why would someone put two files if it could have been done with one file&quot; #HackIM #ForensicChallenge @nullcon @null0x00 &mdash; Prince Komal Boonlia (@boonlia) January 25, 2014 So, Beard-0 looked at a freshly booted VM of the image (since I was lazy + forgot to save the initial snapshot and was already working on another Forensic challenge) and looked at the Temp folder in AppData/Local, there he found a folder name Rar$DI99.160 inside which had one of the file &ldquo;Null final1.pdf&rdquo;.</p></div>
+    </div>
+    
+    <div>
+        <h2><a href="https://mavjs.org/post/nullcon-hackim-2014-forensics-5-writeup/">[Nullcon HackIM 2014] Forensics 5 Writeup</a></h2>
+        <div class="article-style"><p>I play security competitions called Capture The Flag (CTF) with a group called Glider Swirley Points: 500 Description: The client says that the system was compromise. There was no evidence found for the same. The client claims that some anti-forensics tool was used to remove the evidences. Our investigator agrees to it. Can you find out what was the command that was executed and at what time it was done? There was a hint for it by one of the organizers.</p></div>
+    </div>
+    
+    <div>
+        <h2><a href="https://mavjs.org/post/zeromutarts-ctf-crypto-challenges/">Zeromutarts CTF Crypto Challenges</a></h2>
+        <div class="article-style"><p>The magic of rsa (100) You were able to hear some whispering on the last crypto party! *whisper* $d$ is 35181901. Keep it secret or we are doomed! We were given 2 files for the challenge. 1) rsa.py #!/usr/bin/env python import sys n= 65354147 e = 13 d = ?? f = open( sys.argv[1] , &quot;r&quot; ) for line in f: line = int(line.strip()) # you'll have to insert the decrypt function for each line(number) here!</p></div>
+    </div>
+    
+
+    
+
+
+</div>
+<footer class="site-footer">
+    <div class="container">
+        <p class="powered-by">
+
+            &copy; 2016 Ye Myat Kaung (Maverick) &middot; 
+
+            Powered by the <a href="https://github.com/gcushen/hugo-academic" target="_blank">Academic theme</a> for <a href="http://gohugo.io" target="_blank">Hugo</a>.
+
+            <span class="pull-right"><a href="#" id="back_to_top"><span class="button_icon"><i class="fa fa-chevron-up fa-2x" aria-hidden="true"></i></span></a></span>
+
+        </p>
+    </div>
+</footer>
+
+        <script src="//cdnjs.cloudflare.com/ajax/libs/gsap/1.18.4/TweenMax.min.js"></script>
+        <script src="//cdnjs.cloudflare.com/ajax/libs/gsap/latest/plugins/ScrollToPlugin.min.js"></script>
+        <script src="https://mavjs.org/js/jquery-1.12.3.min.js"></script>
+        <script src="https://mavjs.org/js/bootstrap.min.js"></script>
+        <script src="https://mavjs.org/js/hugo-academic.js"></script>
+        
+
+        
+
+        
+        <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.3.0/highlight.min.js"></script>
+        <script>hljs.initHighlightingOnLoad();</script>
+
+        
+        
+
+    </body>
+</html>
+
